@@ -1,0 +1,47 @@
+table 'Month Short Name'
+	lineageTag: 3b272986-ed7a-4881-8343-48dafc284dec
+
+	column Language
+		lineageTag: 40bbce0f-6c1b-4787-88da-37059897366b
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Language Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Language Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Language Fields'
+		isHidden
+		lineageTag: c6228ff4-613b-4f97-b7aa-f83acec1ced1
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Language Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "kind": 2,
+				  "version": 3
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Language Order'
+		isHidden
+		formatString: 0
+		lineageTag: 79bc9aff-7cdd-443b-9d9a-4846bc09d6c2
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Month Short Name-51192f8b-803e-4c88-b966-c9f42f993524' = calculated
+		mode: import
+		source =
+				{
+				    ("EnglishMonthShortName", NAMEOF('Date'[MonthShortName]), 0)
+				}
+
+	annotation PBI_Id = 610b3b81a6a64d44a0719aa967d0e7e0
+

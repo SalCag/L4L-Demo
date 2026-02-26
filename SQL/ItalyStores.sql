@@ -1,0 +1,26 @@
+SELECT [St].[StoreKey]
+        ,[St].[GeographyKey]
+        ,[St].[StoreManager]
+        ,[St].[StoreType]
+        ,[St].[StoreName]
+        ,[St].[StoreDescription]
+        ,[St].[Status]
+        ,[St].[OpenDate]
+        ,[St].[CloseDate]
+        ,[St].[EntityKey]
+        ,[St].[ZipCode]
+        ,[St].[ZipCodeExtension]
+        ,[St].[StorePhone]
+        ,[St].[StoreFax]
+        ,[St].[AddressLine1]
+        ,[St].[AddressLine2]
+        ,[St].[CloseReason]
+        ,[St].[EmployeeCount]
+        ,[St].[SellingAreaSize]
+    FROM [dbo].[DimStore]   AS  [St]
+        INNER JOIN [dbo].[DimGeography]     AS  [G]
+            ON [G].[GeographyKey] = [St].[GeographyKey]
+        WHERE [G].[RegionCountryName] = 'Italy';
+GO
+
+

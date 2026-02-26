@@ -1,0 +1,66 @@
+table 'Multi Language'
+	lineageTag: 18cf4bc6-a597-44e6-8cdf-168fabda9bc9
+
+	column Calendar
+		lineageTag: 1336e63a-88eb-41e3-b5bf-acea7cbac701
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Calendar Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Calendar Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Calendar Fields'
+		isHidden
+		lineageTag: 5846ab93-725e-491e-9443-c265e80577b3
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Calendar Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "kind": 2,
+				  "version": 3
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Calendar Order'
+		isHidden
+		formatString: 0
+		lineageTag: 9dbc73be-5a02-4817-8127-adf095437ee4
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Language
+		lineageTag: 0c726949-b3ef-41d6-b0ef-f8d05a88e28d
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hierarchy
+		lineageTag: ee9e9ff4-3f19-4e31-a5ab-77b08f4cdad0
+		summarizeBy: none
+		sourceColumn: [Value5]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Multi Language-98585459-b9a9-45da-b698-976b68de538b' = calculated
+		mode: import
+		source =
+				{
+				    ("Year", NAMEOF('Date'[Year]), 0, "English", "Calendar"),
+				    ("Semester", NAMEOF('Date'[SemesterName]), 1, "English", "Calendar"),
+				    ("Quarter", NAMEOF('Date'[QuarterName]), 2, "English", "Calendar"),
+				    ("Month Short", NAMEOF('Date'[MonthShortName]), 3, "English", "Calendar"),
+				    ("Date", NAMEOF('Date'[Date]), 5, "English", "Calendar"),
+				    ("Product Name", NAMEOF('Product'[Product Name]), 4, "English", "Product")
+				}
+
+	annotation PBI_Id = 4353dad35a3745aea6d02ea9f79da0e0
+

@@ -1,0 +1,186 @@
+table 'All Measures'
+	lineageTag: d60da626-5d95-466d-98a8-65b2695aa7d9
+
+	measure 'Weighted Average Sales Amount' = ```
+			IF(NOT ISFILTERED('Weighted Avg'[Region Country]),
+			            SUM('Weighted Avg'[WASA]),
+			            AVERAGE('Weighted Avg'[Avg Sales Amount])
+			            )
+			
+			```
+		formatString: #,0.00
+		displayFolder: Weighted Average
+		lineageTag: e6aaa89e-eb93-4e97-a073-b62619a1c23b
+
+	measure 'Sum of Order Count (W)' = SUM('Weighted Avg'[Order Count])
+		formatString: #,0
+		displayFolder: Weighted Average
+		lineageTag: d22ff9b2-149f-4710-a9de-72e6d32e4202
+
+	measure 'Sum of Online Sales Amount (W)' = SUM('Weighted Avg'[Sum of Online Sales Amount])
+		formatString: #,0.00
+		displayFolder: Weighted Average
+		lineageTag: ec374ecb-b072-4c2e-943d-c57783ec0f8c
+
+	measure 'Sum of All Orders (W)' = SUM('Weighted Avg'[All Orders])
+		formatString: #,0
+		displayFolder: Weighted Average
+		lineageTag: a2b60e8c-e154-44bb-8c0c-caa4e692d694
+
+	measure 'Average of Sales Amount (W)' = AVERAGE('Weighted Avg'[Avg Sales Amount])
+		formatString: #,0.00
+		displayFolder: Weighted Average
+		lineageTag: 3108b71a-b35a-4c17-bbc2-77191a655e6f
+
+	measure 'Retail Sales' =
+			CALCULATE(SUMX('Retail Sales'
+			                                ,('Retail Sales'[SalesQuantity] * 'Retail Sales'[UnitPrice]) - 'Retail Sales'[DiscountAmount]
+			                                    )
+			                        )
+			                            * [Scaling (With Default)]
+		formatString: #,0.00
+		displayFolder: Sales
+		lineageTag: ea2a36c9-2ea9-44e3-acc8-7180513d2f0e
+
+	measure 'Last Stock by Date Var 1' = ```
+			
+			            LASTNONBLANKVALUE('Date'[Date],
+			                            SUM('Inventory'[OnHandQuantity])
+			                            )
+			```
+		formatString: #,0
+		displayFolder: Inventory
+		lineageTag: 5e5f7735-5b8d-4a87-ac32-e70ae8819dce
+
+	measure 'Exchange Rate' = SELECTEDVALUE('Exchange Rate'[Average_Rate])
+		displayFolder: Currency Exchange
+		lineageTag: 87e613c3-fa16-4000-bf11-507dd38b4157
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Last Stock by Date Var 2' =
+			
+			VAR LastDateWithInventory = LASTNONBLANK('Date'[Date],
+			                            SUM('Inventory'[OnHandQuantity]))
+			
+			VAR Result =
+			    CALCULATE(
+			              SUM('Inventory'[OnHandQuantity]),
+			              LastDateWithInventory)
+			
+			RETURN
+			    Result
+		formatString: 0
+		displayFolder: Inventory
+		lineageTag: 7c02c788-ddc0-44b1-8ea0-3dfc9d57663a
+
+	measure 'Last Stock by Date Var 2.1' = ```
+			
+			VAR LastDateWithInventory = LASTNONBLANK('Date'[Date],
+			                            NOT ( ISEMPTY('Inventory') ) 
+			                            )
+			
+			VAR Result =
+			    CALCULATE(
+			              SUM('Inventory'[OnHandQuantity]),
+			              LastDateWithInventory)
+			
+			RETURN
+			    Result
+			```
+		formatString: 0
+		displayFolder: Inventory
+		lineageTag: cb034c49-800e-4198-95e7-fad24b9c8bf3
+
+		changedProperty = DisplayFolder
+
+	measure 'Current User' =
+			"The current User is: " & USERPRINCIPALNAME()
+			-- Addition for Versioning Demo
+		lineageTag: de6ac86d-5666-414a-9029-5cd38987541d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Scaling (With Default)' = ```
+			
+			    IF(NOT ISBLANK(SELECTEDVALUE('Scaling'[Scale Name]))
+			        ,SELECTEDVALUE('Scaling'[Faktor])
+			        ,CALCULATE(MAX('Scaling'[Faktor])
+			                    ,'Scaling'[IsDefault] = 1
+			                    )
+			        )
+			```
+		formatString: 0.000000
+		lineageTag: e8fc1374-cebf-414f-ac00-8f67d332b239
+
+	measure 'Sum Retail (Base)' =
+			SUMX('Retail Sales'
+			    ,('Retail Sales'[SalesQuantity] * 'Retail Sales'[UnitPrice]) - 'Retail Sales'[DiscountAmount]
+			    )
+			    * [Scaling (With Default)]
+		displayFolder: Sales\Base
+		lineageTag: 5ad97ac4-a99d-4756-b069-8bae8e7897be
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Last Update' = "Data last updated on: " & MIN('Last Update'[Last Update])
+		lineageTag: 9f33b347-63ef-4317-a8fb-2cea7e1bc329
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Discount Amount' =
+			SUMX('Retail Sales'
+			                        ,'Retail Sales'[DiscountAmount] * 'Retail Sales'[DiscountQuantity])
+		displayFolder: Sales\Discount
+		lineageTag: 293a23a2-0575-45a3-bf5e-da8d2b96f736
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Return Amount' = SUM('Retail Sales'[ReturnAmount])
+		displayFolder: Sales\Others
+		lineageTag: 747e0f76-f7e4-4c27-b215-623bfa825912
+
+	measure 'Return Quantity' = SUM('Retail Sales'[ReturnQuantity])
+		displayFolder: Sales\Others
+		lineageTag: 713b4e5d-7f47-423e-aed6-6b2c3d63a7cf
+
+	measure 'Total Cost' = SUM('Retail Sales'[TotalCost])
+		displayFolder: Sales\Others
+		lineageTag: 0923eb44-7e62-4a3f-bb06-528769ce61fd
+
+	measure 'Sales Quantity' = SUM( 'Retail Sales'[SalesQuantity] )
+		displayFolder: Sales\Others
+		lineageTag: e58f9124-76c2-4fe1-bfd5-0e10c37d662a
+
+	measure 'Unit Cost' = SUM('Retail Sales'[UnitCost])
+		displayFolder: Sales\Others
+		lineageTag: c3b49e8c-af6e-4b3c-a2c0-d8914bde888e
+
+	measure 'Unit Price' = SUM('Retail Sales'[UnitPrice])
+		displayFolder: Sales\Others
+		lineageTag: be8853ea-e2d5-47e5-9b13-307ac8526844
+
+	measure '_Current Date Title' =
+			"The current date is set to: " & CONVERT(CALCULATE(MAX('Date'[Date])
+			                                                                ,'Date'[IsToday] = TRUE()
+			                                                                    ), STRING)
+		lineageTag: 615d4d7f-4259-42ec-9e34-600b1b3ed59b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'All Measures-73e585cd-90fc-476f-af6f-051eddf38311' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Dummy = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Dummy", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Dummy"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation BestPracticeAnalyzer_IgnoreRules = {"RuleIDs":["ENSURE_TABLES_HAVE_RELATIONSHIPS"]}
+
+	annotation PBI_NavigationStepName = Navigation
+

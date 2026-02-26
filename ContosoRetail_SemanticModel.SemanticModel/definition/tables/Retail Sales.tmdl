@@ -1,0 +1,212 @@
+table 'Retail Sales'
+	lineageTag: 5697e32a-350d-4b7e-8ab4-003b6997857d
+
+	column DateKey
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 83b574fb-e793-4232-a3c1-9827e979a0a4
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column channelKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7e989a16-175e-42f1-94e9-6d3be2e7439d
+		summarizeBy: none
+		sourceColumn: channelKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 12b9fd55-d044-4704-8deb-b8b68c5d7a0c
+		summarizeBy: none
+		sourceColumn: StoreKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: da3e6fe4-f3e2-4478-b544-de6b7c721604
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PromotionKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 493666f1-f6c4-4b0b-8b06-5e72bf66b040
+		summarizeBy: none
+		sourceColumn: PromotionKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrencyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1780a21b-634e-44de-9eee-b63cd38e3179
+		summarizeBy: none
+		sourceColumn: CurrencyKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKeyYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 9a869506-baba-4896-be55-c1af0a55a289
+		summarizeBy: sum
+		sourceColumn: DateKeyYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitCost
+		dataType: double
+		formatString: "CHF"\ #,0.###############;"CHF"-#,0.###############;"CHF"\ #,0.###############
+		lineageTag: e7d6ec59-1120-4cf1-a73f-7751c9ad64ae
+		summarizeBy: sum
+		sourceColumn: UnitCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-CH"}
+
+	column UnitPrice
+		dataType: double
+		formatString: "CHF"\ #,0.###############;"CHF"-#,0.###############;"CHF"\ #,0.###############
+		lineageTag: 99267415-526d-4d2b-a8d3-198af1a7c829
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-CH"}
+
+	column SalesQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: cb7b3d07-8e99-45bd-97a3-d49a4ff1e530
+		summarizeBy: sum
+		sourceColumn: SalesQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReturnQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: c8578648-cd32-432d-ac3d-6c994aea954c
+		summarizeBy: sum
+		sourceColumn: ReturnQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReturnAmount
+		dataType: double
+		formatString: "CHF"\ #,0.###############;"CHF"-#,0.###############;"CHF"\ #,0.###############
+		lineageTag: ab9568ae-1153-4e15-adfa-24f00a4fe4ee
+		summarizeBy: sum
+		sourceColumn: ReturnAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-CH"}
+
+	column DiscountQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: c0aa4961-d3ff-4ce8-a697-511ebe464add
+		summarizeBy: sum
+		sourceColumn: DiscountQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiscountAmount
+		dataType: double
+		formatString: "CHF"\ #,0.###############;"CHF"-#,0.###############;"CHF"\ #,0.###############
+		lineageTag: 3c0464d7-7353-4f5e-8355-fb5f2c187c5b
+		summarizeBy: sum
+		sourceColumn: DiscountAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-CH"}
+
+	column TotalCost
+		dataType: double
+		formatString: "CHF"\ #,0.###############;"CHF"-#,0.###############;"CHF"\ #,0.###############
+		lineageTag: 5dc654af-ef53-44c9-8418-aa935f44d08c
+		summarizeBy: sum
+		sourceColumn: TotalCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-CH"}
+
+	column SalesAmount
+		dataType: double
+		formatString: "CHF"\ #,0.###############;"CHF"-#,0.###############;"CHF"\ #,0.###############
+		lineageTag: e81a875d-f131-4f0f-a0de-e55bb9ad119c
+		summarizeBy: sum
+		sourceColumn: SalesAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-CH"}
+
+	column SalesKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 8eb444fd-1779-4777-bdb1-be6a4fd48ed3
+		summarizeBy: count
+		sourceColumn: SalesKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sale Line Counter'
+		dataType: int64
+		formatString: 0
+		lineageTag: 788ecb95-b203-4322-9a10-ec29eb127ed2
+		summarizeBy: sum
+		sourceColumn: Sale Line Counter
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Retail Sales-d287b40d-6223-4fc8-bef9-3060ecd99fac' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SourceServer, ContosoRetailDW_DB, [Query="SELECT [SalesKey]#(lf)        ,[SaleLineCounter]    AS  [Sale Line Counter]#(lf)        ,CONVERT(date, DATEADD(yyyy, 16, [DateKey]))     AS  [DateKey]#(lf)        ,[channelKey]#(lf)        ,[StoreKey]#(lf)        ,[ProductKey]#(lf)        ,[PromotionKey]#(lf)        ,[CurrencyKey]#(lf)        ,[UnitCost]#(lf)        ,[UnitPrice]#(lf)        ,[SalesQuantity]#(lf)        ,[ReturnQuantity]#(lf)        ,[ReturnAmount]#(lf)        ,[DiscountQuantity]#(lf)        ,[DiscountAmount]#(lf)        ,[TotalCost]#(lf)        ,[SalesAmount]#(lf)        ,[DateKeyYear]#(lf)    FROM [dbo].[v_FactSales];"]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"DateKey", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = Retail Sales
+
+	annotation PBI_NavigationStepName = Navigation
+

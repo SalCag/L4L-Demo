@@ -1,0 +1,32 @@
+expression 'Retail Measures' =
+		let
+		    Source = #"Retail Sales",
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"Measure"}),
+		    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+		in
+		    #"Removed Duplicates"
+	lineageTag: af50947d-1a4f-4444-9478-fea4923de128
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression SourceServer = "sca4tvddemo.database.windows.net" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 7c9540e4-b4a3-4c6e-b072-0de6daf6c226
+
+	annotation PBI_ResultType = Text
+
+expression ContosoRetailDW_DB = "ContosoRetailDW" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 220a0424-24d4-42f1-a09b-752ecbbe7735
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression Test_Demo_DB = "Test_Demo" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: c906bdb1-755d-479a-9b32-6d783b6988fc
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+

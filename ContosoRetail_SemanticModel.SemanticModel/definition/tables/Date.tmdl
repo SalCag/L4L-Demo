@@ -1,0 +1,671 @@
+table Date
+	lineageTag: b1b21c24-55b0-492d-8c32-ded0f6b776c1
+	dataCategory: Time
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: afafd56e-6aa9-40eb-8793-c873bd70417a
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: mm/dd/yyyy
+		lineageTag: f35b38c1-a235-4f17-b0f6-ae638e27a0a7
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: ab1f72bf-4040-4e93-92e4-58f89466f364
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = User
+
+	column Semester
+		dataType: int64
+		formatString: 0
+		lineageTag: bc551787-de0e-4b60-b2fd-e66b3d791339
+		summarizeBy: none
+		sourceColumn: Semester
+
+		annotation SummarizationSetBy = User
+
+	column SemesterKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f7c6adf6-25db-4674-b993-958c522b37fd
+		summarizeBy: none
+		sourceColumn: SemesterKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 593eba26-5cc9-4b86-b1de-139410e5d0c3
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = User
+
+	column QuarterKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f59fecbb-c2a8-4612-8d11-9938012727a1
+		summarizeBy: none
+		sourceColumn: QuarterKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: f23f48e7-6060-4184-93a6-a55ebdf953cd
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = User
+
+	column MonthKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 43eeeca4-a4ab-4d0c-9999-4921679342b9
+		summarizeBy: none
+		sourceColumn: MonthKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Week
+		dataType: int64
+		formatString: 0
+		lineageTag: d5fb52e2-efde-465b-9db6-a43659174e91
+		summarizeBy: none
+		sourceColumn: Week
+
+		annotation SummarizationSetBy = User
+
+	column WeekKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: dbee0640-5256-405c-84e1-bf8647b2defc
+		summarizeBy: none
+		sourceColumn: WeekKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column DayOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: d5cb57b6-db98-4be6-b16f-49ce75171673
+		summarizeBy: none
+		sourceColumn: DayOfYear
+
+		annotation SummarizationSetBy = User
+
+	column DayOfYearKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fbf85198-781a-412d-9f7c-c5d8a79ee282
+		summarizeBy: none
+		sourceColumn: DayOfYearKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column DayOfMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: 9d2bc3fc-ac98-49eb-b8d6-b472150b74d1
+		summarizeBy: none
+		sourceColumn: DayOfMonth
+
+		annotation SummarizationSetBy = User
+
+	column DayOfWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: eb150c1d-f7c3-4b81-9374-f02a4a61147f
+		summarizeBy: none
+		sourceColumn: DayOfWeek
+
+		annotation SummarizationSetBy = User
+
+	column DayOfWeekKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b463a654-d817-4159-9a9d-fd97ddd8611a
+		summarizeBy: none
+		sourceColumn: DayOfWeekKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column IsToday
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: Time Flags
+		lineageTag: c2b6c9f8-17d9-45b6-8c80-18ee030d51fb
+		summarizeBy: none
+		sourceColumn: IsToday
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearIndex
+		dataType: int64
+		formatString: 0
+		displayFolder: Time Index
+		lineageTag: 3140c717-e960-428c-8b74-71ddbd6685ee
+		summarizeBy: none
+		sourceColumn: YearIndex
+
+		annotation SummarizationSetBy = User
+
+	column QuarterIndex
+		dataType: int64
+		formatString: 0
+		displayFolder: Time Index
+		lineageTag: cedb8825-a7be-483f-ac5c-2b1a949b7646
+		summarizeBy: none
+		sourceColumn: QuarterIndex
+
+		annotation SummarizationSetBy = User
+
+	column SemesterIndex
+		dataType: int64
+		formatString: 0
+		displayFolder: Time Index
+		lineageTag: b2b4cded-b7b5-48f6-aa72-194ce0764103
+		summarizeBy: none
+		sourceColumn: SemesterIndex
+
+		annotation SummarizationSetBy = User
+
+	column MonthIndex
+		dataType: int64
+		formatString: 0
+		displayFolder: Time Index
+		lineageTag: c3132e72-33d8-4910-ac24-f9f84a0cb8de
+		summarizeBy: none
+		sourceColumn: MonthIndex
+
+		annotation SummarizationSetBy = User
+
+	column WeekIndex
+		dataType: int64
+		formatString: 0
+		displayFolder: Time Index
+		lineageTag: 49b16fe6-f482-444c-ae9f-aa2049091f5c
+		summarizeBy: none
+		sourceColumn: WeekIndex
+
+		annotation SummarizationSetBy = User
+
+	column DayIndex
+		dataType: int64
+		formatString: 0
+		displayFolder: Time Index
+		lineageTag: 9d470e41-3955-44e8-9033-6818f9b335b6
+		summarizeBy: none
+		sourceColumn: DayIndex
+
+		annotation SummarizationSetBy = User
+
+	column LastDayOfMonth
+		dataType: dateTime
+		formatString: Long Date
+		displayFolder: Last Dates
+		lineageTag: 6b229c1a-ab43-4983-b41e-6bed4046919c
+		summarizeBy: none
+		sourceColumn: LastDayOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastDayOfMonthKey
+		dataType: int64
+		formatString: 0
+		displayFolder: Last Dates
+		lineageTag: b593550f-6605-4df1-982d-695b2d0a5576
+		summarizeBy: none
+		sourceColumn: LastDayOfMonthKey
+
+		annotation SummarizationSetBy = User
+
+	column YearIndex_Name
+		dataType: string
+		displayFolder: Time Index
+		lineageTag: e5dbfc76-8492-4c49-b185-da8017de9684
+		summarizeBy: none
+		sourceColumn: YearIndex_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthKeyPY
+		dataType: int64
+		formatString: 0
+		lineageTag: f1d63680-128a-4fda-99da-1980164958bd
+		summarizeBy: sum
+		sourceColumn: MonthKeyPY
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonth
+		dataType: string
+		lineageTag: 42a121c5-4172-4865-9717-60aff42d4502
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDayOfMonth
+		dataType: dateTime
+		formatString: Long Date
+		displayFolder: First Dates
+		lineageTag: 68b1a7a3-05ec-45da-831c-420b98471ee1
+		summarizeBy: none
+		sourceColumn: FirstDayOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDayOfMonthKey
+		dataType: int64
+		formatString: 0
+		displayFolder: First Dates
+		lineageTag: d7da2e48-0e80-4f93-bcc6-844fbe088237
+		summarizeBy: count
+		sourceColumn: FirstDayOfMonthKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDayOfMonthPY
+		dataType: dateTime
+		formatString: Long Date
+		displayFolder: First Dates
+		lineageTag: cb0c7c83-c88e-4d7e-b5ea-72bbb01fd046
+		summarizeBy: none
+		sourceColumn: FirstDayOfMonthPY
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDayOfMonthPYKey
+		dataType: int64
+		formatString: 0
+		displayFolder: First Dates
+		lineageTag: c338cca0-98f3-4d1e-9a9a-07258eb6a2c6
+		summarizeBy: count
+		sourceColumn: FirstDayOfMonthPYKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastDayOfMonthPY
+		dataType: dateTime
+		formatString: Long Date
+		displayFolder: Last Dates
+		lineageTag: 57667fa4-01d4-459b-8045-2afe8ed9aedd
+		summarizeBy: none
+		sourceColumn: LastDayOfMonthPY
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastDayOfMonthPYKey
+		dataType: int64
+		formatString: 0
+		displayFolder: Last Dates
+		lineageTag: afebd369-020f-4ce4-9de3-0b68430b1a4b
+		summarizeBy: count
+		sourceColumn: LastDayOfMonthPYKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearWeek
+		dataType: string
+		lineageTag: f49dd208-8c33-4aba-a395-1793f07537b2
+		summarizeBy: none
+		sourceColumn: YearWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDayOfWeekDate
+		dataType: dateTime
+		formatString: Long Date
+		displayFolder: First Dates
+		lineageTag: 8e31ea1f-6449-4bd7-9fa7-275174938342
+		summarizeBy: none
+		sourceColumn: FirstDayOfWeekDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDayOfWeekDateKey
+		dataType: int64
+		formatString: 0
+		displayFolder: First Dates
+		lineageTag: 5fcad519-11d5-48e6-91f4-afde70629e6f
+		summarizeBy: count
+		sourceColumn: FirstDayOfWeekDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastDayOfWeekDate
+		dataType: dateTime
+		formatString: Long Date
+		displayFolder: Last Dates
+		lineageTag: 3609b732-2673-4a87-8a03-654f3d13d376
+		summarizeBy: none
+		sourceColumn: LastDayOfWeekDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastDayOfWeekDateKey
+		dataType: int64
+		formatString: 0
+		displayFolder: Last Dates
+		lineageTag: 61a67dc3-66e5-4065-9068-b7b8120444d0
+		summarizeBy: count
+		sourceColumn: LastDayOfWeekDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDayOfWeekDatePY
+		dataType: dateTime
+		formatString: Long Date
+		displayFolder: First Dates
+		lineageTag: 3586d375-c300-4072-afa1-c66581f1ee3f
+		summarizeBy: none
+		sourceColumn: FirstDayOfWeekDatePY
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDayOfWeekDatePYKey
+		dataType: int64
+		formatString: 0
+		displayFolder: First Dates
+		lineageTag: 0dcfde21-e03b-4436-a093-ce4433573685
+		summarizeBy: count
+		sourceColumn: FirstDayOfWeekDatePYKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastDayOfWeekDatePY
+		dataType: dateTime
+		formatString: Long Date
+		displayFolder: Last Dates
+		lineageTag: 7f864cd0-0261-4140-829e-a8934d670c6e
+		summarizeBy: none
+		sourceColumn: LastDayOfWeekDatePY
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastDayOfWeekDatePYKey
+		dataType: int64
+		formatString: 0
+		displayFolder: Last Dates
+		lineageTag: 657adee8-58e5-492e-b624-cf0abbdb4fcf
+		summarizeBy: count
+		sourceColumn: LastDayOfWeekDatePYKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekWeekday
+		dataType: string
+		lineageTag: dad2043a-7955-415f-a3f5-89075bb849df
+		summarizeBy: none
+		sourceColumn: WeekWeekday
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearWeekWeekday
+		dataType: string
+		lineageTag: 6beea5d3-aaa3-4135-a1d8-e2e66a2ec56d
+		summarizeBy: none
+		sourceColumn: YearWeekWeekday
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsWorkingday
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: Time Flags
+		lineageTag: 7813b1b4-c441-430c-8e83-756dc98c272f
+		summarizeBy: none
+		sourceColumn: IsWorkingday
+
+		annotation SummarizationSetBy = Automatic
+
+	column WorkingdayNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 29280486-8ccb-49ff-bc38-0df671eb7607
+		summarizeBy: sum
+		sourceColumn: WorkingdayNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCurrentWeek
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: Time Flags
+		lineageTag: cb3e9665-a2eb-4688-b6b7-0cfb001bff58
+		summarizeBy: none
+		sourceColumn: IsCurrentWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCurrentMonth
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: Time Flags
+		lineageTag: 8c54a0ab-fb8b-443d-8a1e-0141e9cf9406
+		summarizeBy: none
+		sourceColumn: IsCurrentMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCurrentQuarter
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: Time Flags
+		lineageTag: d849f180-95dc-42da-a11f-229918c928bc
+		summarizeBy: none
+		sourceColumn: IsCurrentQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCurrentSemester
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: Time Flags
+		lineageTag: 00c7f1d4-eb04-4b6c-93e0-9f0aa6e248d1
+		summarizeBy: none
+		sourceColumn: IsCurrentSemester
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCurrentYear
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: Time Flags
+		lineageTag: 87a3f41d-3bfe-4936-baa6-eaa9719762ed
+		summarizeBy: none
+		sourceColumn: IsCurrentYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsInCurrentWindow
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: Time Flags
+		lineageTag: 157adbf0-a393-4c60-bad4-1b72ce6cf73a
+		summarizeBy: none
+		sourceColumn: IsInCurrentWindow
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearQuarterName
+		dataType: string
+		lineageTag: 8bcfd6bd-2c26-43e8-ab5f-02c6565e4880
+		summarizeBy: none
+		sourceColumn: YearQuarterName
+
+		annotation SummarizationSetBy = Automatic
+
+	column SemesterName
+		dataType: string
+		lineageTag: 1cec1a95-9841-47d5-a011-84b227984374
+		summarizeBy: none
+		sourceColumn: SemesterName
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearSemesterName
+		dataType: string
+		lineageTag: 328d7393-5c9f-4fc4-961c-9d9754529060
+		summarizeBy: none
+		sourceColumn: YearSemesterName
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuarterName
+		dataType: string
+		lineageTag: 3858ccee-2cd0-4d06-a624-39bf62c71fc0
+		summarizeBy: none
+		sourceColumn: QuarterName
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuarterName2
+		dataType: string
+		lineageTag: b1dd1cf4-a9c6-4e15-a93f-f295e78a28de
+		summarizeBy: none
+		sourceColumn: QuarterName2
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearQuarterName2
+		dataType: string
+		lineageTag: 10607c36-4f98-4d84-8482-6fd939a3192a
+		summarizeBy: none
+		sourceColumn: YearQuarterName2
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: 04bf79cd-50e7-4907-a729-0a2499aee441
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthShortName
+		dataType: string
+		lineageTag: 8bbd17e5-8268-407a-bce9-42930f3f26f1
+		summarizeBy: none
+		sourceColumn: MonthShortName
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonthShortName
+		dataType: string
+		lineageTag: 25418832-00dc-412d-9a52-3a00104db2a6
+		summarizeBy: none
+		sourceColumn: YearMonthShortName
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekKeyPY
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d074859-c382-4494-be63-1bdac929faa9
+		summarizeBy: sum
+		sourceColumn: WeekKeyPY
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearOfWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: b5368539-324e-4051-848a-db310df2bcf8
+		summarizeBy: sum
+		sourceColumn: YearOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfWeekName
+		dataType: string
+		lineageTag: 99c31d82-9437-48e8-aa43-42c018a16f0e
+		summarizeBy: none
+		sourceColumn: DayOfWeekName
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfWeekNameShort
+		dataType: string
+		lineageTag: ed726f66-f0fa-4315-999b-4ad66f544020
+		summarizeBy: none
+		sourceColumn: DayOfWeekNameShort
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsLeapYear
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b41c8bc2-b4f6-4b8e-969e-101f208ffb2b
+		summarizeBy: none
+		sourceColumn: IsLeapYear
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Calendar
+		lineageTag: 9acccda6-aecc-4c82-981d-3921190d26e5
+
+		level Year
+			lineageTag: 8b6796e4-3c3d-4579-af06-bb5a92ee3948
+			column: Year
+
+		level Date
+			lineageTag: 8c659d57-61d3-4e1b-91c8-843516a5f83d
+			column: Date
+
+	partition Date-1df832c2-1fec-45eb-8a33-4ebef966e9ea = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SourceServer, Test_Demo_DB, [Query="SELECT [DateKey]#(lf)        ,[Date]#(lf)        ,[Year]#(lf)        ,[Semester]#(lf)        ,[EnglishSemesterName]          AS  [SemesterName]#(lf)        ,[EnglishYearSemesterName]      AS  [YearSemesterName]#(lf)        ,[SemesterKey]#(lf)        ,[Quarter]#(lf)        ,[EnglishQuarterName]           AS  [QuarterName]#(lf)        ,[EnglishYearQuarterName]       AS  [YearQuarterName]#(lf)        ,[QuarterKey]#(lf)        ,[QuarterName]#(lf)        ,[YearQuarterName]#(lf)        ,[Month]#(lf)        ,[MonthKey]#(lf)        ,[MonthKeyPY]#(lf)        ,[YearMonth]#(lf)        ,[FirstDayOfMonth]#(lf)        ,[FirstDayOfMonthKey]#(lf)        ,[LastDayOfMonth]#(lf)        ,[LastDayOfMonthKey]#(lf)        ,[FirstDayOfMonthPY]#(lf)        ,[FirstDayOfMonthPYKey]#(lf)        ,[LastDayOfMonthPY]#(lf)        ,[LastDayOfMonthPYKey]#(lf)        ,[EnglishMonthName]             AS  [MonthName]#(lf)        ,[EnglishMonthShortName]        AS  [MonthShortName]#(lf)        ,[EnglishYearMonthShortName]    AS  [YearMonthShortName]#(lf)        ,[Week]#(lf)        ,[WeekKey]#(lf)        ,[WeekKeyPY]#(lf)        ,[YearOfWeek]#(lf)        ,[YearWeek]#(lf)        ,[DayOfYear]#(lf)        ,[DayOfYearKey]#(lf)        ,[DayOfMonth]#(lf)        ,[DayOfWeek]#(lf)        ,[DayOfWeekKey]#(lf)        ,[FirstDayOfWeekDate]#(lf)        ,[FirstDayOfWeekDateKey]#(lf)        ,[LastDayOfWeekDate]#(lf)        ,[LastDayOfWeekDateKey]#(lf)        ,[FirstDayOfWeekDatePY]#(lf)        ,[FirstDayOfWeekDatePYKey]#(lf)        ,[LastDayOfWeekDatePY]#(lf)        ,[LastDayOfWeekDatePYKey]#(lf)        ,[EnglishDayOfWeekName]         AS  [DayOfWeekName]#(lf)        ,[EnglishDayOfWeekNameShort]    AS  [DayOfWeekNameShort]#(lf)        ,[WeekWeekday]#(lf)        ,[YearWeekWeekday]#(lf)        ,[IsWorkingday]#(lf)        ,[WorkingdayNumber]#(lf)        ,[IsToday]#(lf)        ,[IsCurrentWeek]#(lf)        ,[IsCurrentMonth]#(lf)        ,[IsCurrentQuarter]#(lf)        ,[IsCurrentSemester]#(lf)        ,[IsCurrentYear]#(lf)        ,[IsLeapYear]#(lf)        ,[IsInCurrentWindow]#(lf)        ,[YearIndex]#(lf)        ,[YearIndex_Name]#(lf)        ,[QuarterIndex]#(lf)        ,[SemesterIndex]#(lf)        ,[MonthIndex]#(lf)        ,[WeekIndex]#(lf)        ,[DayIndex]#(lf)    FROM [dbo].[Date]#(lf)        WHERE [Year] BETWEEN 2022 AND 2026;#(lf)"])
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = Date
+
+	annotation PBI_NavigationStepName = Navigation
+

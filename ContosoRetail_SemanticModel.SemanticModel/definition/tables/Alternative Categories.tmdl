@@ -1,0 +1,42 @@
+table 'Alternative Categories'
+	lineageTag: 2cb4df1f-ef9b-447e-a97f-dda756d52266
+
+	column Subcategory
+		dataType: string
+		lineageTag: 16d55494-c61f-4233-bc0b-e0b7f9df4c59
+		summarizeBy: none
+		sourceColumn: Subcategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 96b9bdab-c04b-4f86-a122-f9a439b87cd6
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hierarchy
+		dataType: string
+		lineageTag: 9ff94b73-dcd1-497a-9b29-2b5b68e57313
+		summarizeBy: none
+		sourceColumn: Hierarchy
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Alternative Categories-537ee069-5922-4ca9-8957-4e3888792290' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SourceServer, ContosoRetailDW_DB),
+				    #"dbo_Alternative Categories" = Source{[Schema="dbo",Item="Alternative Categories"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(#"dbo_Alternative Categories",{{"ProductSubcategoryName", "Subcategory"}, {"ProductCategoryName", "Category"}}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Renamed Columns",{{"Hierarchy", type text}})
+				in
+				    #"Changed Type2"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

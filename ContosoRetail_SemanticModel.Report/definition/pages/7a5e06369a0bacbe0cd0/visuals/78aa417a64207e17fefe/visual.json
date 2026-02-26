@@ -1,0 +1,103 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "78aa417a64207e17fefe",
+  "position": {
+    "x": 0,
+    "y": 390.44776119402985,
+    "z": 2000,
+    "height": 329.55223880597015,
+    "width": 596.41791044776119,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "waterfall6C9ED82ABD1F44C4A0D590CE01EB5EE7",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date"
+                    }
+                  },
+                  "Property": "EnglishMonthShortName"
+                }
+              },
+              "queryRef": "Date.EnglishMonthShortName",
+              "nativeQueryRef": "EnglishMonthShortName",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "All Measures"
+                    }
+                  },
+                  "Property": "Online Sales (By Order Date)"
+                }
+              },
+              "queryRef": "All Measures.Online Sales (By Order Date)",
+              "nativeQueryRef": "Online Sales (By Order Date)"
+            }
+          ]
+        },
+        "PreviousYear": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "All Measures"
+                    }
+                  },
+                  "Property": "Online Sales PY"
+                }
+              },
+              "queryRef": "All Measures.Online Sales PY",
+              "nativeQueryRef": "Online Sales PY"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "visualCreatedVersion": [
+        {
+          "properties": {
+            "version": {
+              "expr": {
+                "Literal": {
+                  "Value": "'7.6.0.72'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "chartType": [
+        {
+          "properties": {
+            "chartType": {
+              "expr": {
+                "Literal": {
+                  "Value": "3D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

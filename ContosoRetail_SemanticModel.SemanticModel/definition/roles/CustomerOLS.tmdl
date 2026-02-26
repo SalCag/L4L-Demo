@@ -1,0 +1,5 @@
+role CustomerOLS
+	modelPermission: read
+
+	annotation PBI_Id = be5bedb3d0f34471b9d82b74d0b13119
+

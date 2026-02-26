@@ -1,0 +1,61 @@
+relationship 522f25f6-7f0d-44bb-a8f0-245102189513
+	fromColumn: Store.GeographyKey
+	toColumn: Geography.GeographyKey
+
+relationship 944aea7f-e38b-4d51-bf70-2eaaefa62d02
+	fromColumn: 'Retail Sales'.CurrencyKey
+	toColumn: Currency.CurrencyKey
+
+relationship 4638a551-d4e3-457f-8725-8043dbe7f0ec
+	fromColumn: 'Retail Sales'.channelKey
+	toColumn: Channel.ChannelKey
+
+relationship 50d295e1-f034-4aff-8e06-a07ed85b6441
+	fromColumn: 'Retail Sales'.PromotionKey
+	toColumn: Promotion.PromotionKey
+
+relationship cbfd7217-17d4-48b2-b867-73302def5346
+	fromColumn: 'Retail Sales'.StoreKey
+	toColumn: Store.StoreKey
+
+relationship accc154e-4139-4366-91d1-90fbb121556e
+	fromColumn: 'Retail Sales'.ProductKey
+	toColumn: Product.ProductKey
+
+relationship d89ab924-c0bf-4175-8391-126fcd618c1d
+	fromColumn: 'Retail Sales'.DateKey
+	toColumn: Date.Date
+
+relationship 002fdc58-08d9-4e36-9449-7a20db18b37c
+	fromColumn: 'Exchange Rate'.CurrencyKey
+	toColumn: Currency.CurrencyKey
+
+relationship 5d868168-a578-46a3-bba7-1ad72b83a6de
+	fromColumn: Inventory.CurrencyKey
+	toColumn: Currency.CurrencyKey
+
+relationship 2653fff5-2cd6-432a-aeea-944dbf8982bf
+	fromColumn: Inventory.StoreKey
+	toColumn: Store.StoreKey
+
+relationship 5c4a2b55-7d04-44b5-adff-c2e54855f7b6
+	fromColumn: Inventory.ProductKey
+	toColumn: Product.ProductKey
+
+relationship f0893081-324d-47ea-b55f-a79807ca9327
+	fromColumn: Inventory.DateKey
+	toColumn: Date.Date
+
+relationship abb0d519-23d3-443d-8cdb-bb1826f9e9f9
+	fromColumn: 'Exchange Rate'.DateKey
+	toColumn: Date.Date
+
+relationship fd80b127-5cf1-4bed-b2f8-0a1c45b2c7b2
+	toCardinality: many
+	fromColumn: Product.Subcategory
+	toColumn: 'Alternative Categories'.Subcategory
+
+relationship 348859ff-4aae-4dc7-abd9-f71a8c6e25e3
+	fromColumn: Product.BrandColor
+	toColumn: 'Brand Colors'.BrandColor
+

@@ -47,7 +47,7 @@ SELECT [StoreKey]
         ,[CloseDate]
         ,EOMONTH([OpenDate])    AS  [OpenDate_EOM]
         ,EOMONTH([CloseDate])   AS  [CloseDate_EOM]
-        ,[L4L_Status]
+        ,[L4L_Status_Src]
     FROM [Result]
 ORDER BY [StoreKey]
             ,[OpenDate];

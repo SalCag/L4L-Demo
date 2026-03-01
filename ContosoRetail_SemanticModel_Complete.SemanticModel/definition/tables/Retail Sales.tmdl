@@ -188,7 +188,7 @@ table 'Retail Sales'
 
 	column StoreMonthKey
 		dataType: string
-		lineageTag: 6541fa9b-0a95-4935-b3ea-c902466709f0
+		lineageTag: 34ef8644-0be9-4944-99ed-c62b3fabe7a7
 		summarizeBy: none
 		sourceColumn: StoreMonthKey
 

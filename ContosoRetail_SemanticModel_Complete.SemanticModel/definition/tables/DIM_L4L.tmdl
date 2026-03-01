@@ -1,0 +1,48 @@
+table DIM_L4L
+	lineageTag: 0a96c99c-2768-48c1-914f-f99e42e3282b
+
+	column L4LKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 6a72cd53-312e-4757-a1d6-021c0d558243
+		summarizeBy: none
+		sourceColumn: L4LKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column L4L_Text
+		dataType: string
+		lineageTag: 38f58916-a0a1-4853-b78a-1ae76faa7953
+		summarizeBy: none
+		sourceColumn: L4L_Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column L4L_LongText
+		dataType: string
+		lineageTag: 4713eaf7-f2b5-41af-9039-1c56ae91e1b2
+		summarizeBy: none
+		sourceColumn: L4L_LongText
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reason
+		dataType: string
+		lineageTag: d0cef218-6b44-42b3-97e8-998992fd8f8b
+		summarizeBy: none
+		sourceColumn: Reason
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_L4L = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SourceServer, ContosoRetailDW_DB, [Query="SELECT 1#(tab)#(tab)AS#(tab)[L4LKey]#(lf)#(tab)#(tab),'Comparable'#(tab)AS#(tab)[L4L_Text]#(lf)#(tab)#(tab),'Comparable - L4L'#(tab)AS#(tab)[L4L_LongText]#(lf)#(tab)#(tab),'L4L'#(tab)#(tab)#(tab)#(tab)AS#(tab)[Reason]#(lf)UNION ALL#(lf)SELECT 2#(tab)#(tab)AS#(tab)[L4LKey]#(lf)#(tab)#(tab),'Non-Comparable'#(tab)AS#(tab)[L4L_Text]#(lf)#(tab)#(tab),'Non-Comparable - Opening'#(tab)AS#(tab)[L4L_LongText]#(lf)#(tab)#(tab),'Opening'#(tab)#(tab)#(tab)AS#(tab)[Reason]#(lf)#(lf)UNION ALL#(lf)SELECT 3#(tab)#(tab)AS#(tab)[L4LKey]#(lf)#(tab)#(tab),'Non-Comparable'#(tab)AS#(tab)[L4L_Text]#(lf)#(tab)#(tab),'Non-Comparable - Closing'#(tab)AS#(tab)[L4L_LongText]#(lf)#(tab)#(tab),'Closing'#(tab)#(tab)#(tab)AS#(tab)[Reason]#(lf)#(lf)UNION ALL#(lf)SELECT 4#(tab)#(tab)AS#(tab)[L4LKey]#(lf)#(tab)#(tab),'Non-Comparable'#(tab)AS#(tab)[L4L_Text]#(lf)#(tab)#(tab),'Non-Comparable - Renew'#(tab)AS#(tab)[L4L_LongText]#(lf)#(tab)#(tab),'Renew'#(tab)#(tab)#(tab)AS#(tab)[Reason]#(lf)"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

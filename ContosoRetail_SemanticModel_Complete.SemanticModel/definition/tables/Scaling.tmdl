@@ -1,0 +1,52 @@
+table Scaling
+	lineageTag: f5e85f21-bd3b-40ca-a6de-cbab10587ede
+
+	column 'Scale Name'
+		dataType: string
+		lineageTag: db006a7a-9ea8-4fb2-acf5-3b3a9ff54b2d
+		summarizeBy: none
+		sourceColumn: Scale Name
+		sortByColumn: Order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Faktor
+		dataType: double
+		lineageTag: 22558db6-33ca-4ca0-8a27-eebc67981d8d
+		summarizeBy: sum
+		sourceColumn: Faktor
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IsDefault
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c461736-c68b-4a2c-909d-83ff2e708669
+		summarizeBy: sum
+		sourceColumn: IsDefault
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: string
+		lineageTag: 84a22f4d-4e74-46bf-b94c-0d6775569597
+		summarizeBy: none
+		sourceColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Scaling = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45W8ssvyk3MUdJRMgRiAzAdqxOtFJJRlF9anJiXUgwS1jMwMIQqMQJL+2bm5GTm58EkDSDyIO3GSrGxAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Scale Name" = _t, Faktor = _t, IsDefault = _t, Order = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Scale Name", type text}, {"Faktor", type number}, {"IsDefault", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

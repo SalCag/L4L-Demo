@@ -1,0 +1,218 @@
+table Inventory
+	lineageTag: c23cc17d-6b96-4a9c-a193-e517ff3a37bf
+
+	column InventoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a7799973-84e1-4b10-a60b-298332892a2e
+		summarizeBy: count
+		sourceColumn: InventoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: dateTime
+		isHidden
+		formatString: dd-mmm-yy
+		lineageTag: 67886c1b-1df0-48a5-a2f4-e8c3a0a14bb2
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column StoreKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a1d28b18-83f6-4773-b8b8-6f54d3f8c82b
+		summarizeBy: none
+		sourceColumn: StoreKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d90cc801-a301-4625-9b3c-43145448a6c9
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrencyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: aa317348-59e6-43f6-9978-8b58759533e8
+		summarizeBy: none
+		sourceColumn: CurrencyKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OnHandQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 80a6dfa2-e422-4f32-8ebe-6cd6e7f6492d
+		summarizeBy: sum
+		sourceColumn: OnHandQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column OnOrderQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 3a29df10-bd36-4a9f-8855-da105665d039
+		summarizeBy: sum
+		sourceColumn: OnOrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column SafetyStockQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 03ab7fbe-d151-43c2-b010-89747e2fbb35
+		summarizeBy: sum
+		sourceColumn: SafetyStockQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitCost
+		dataType: decimal
+		formatString: #,0.00
+		lineageTag: 681b67a7-8e26-4dc3-9da4-9f54addac348
+		summarizeBy: sum
+		sourceColumn: UnitCost
+
+		annotation SummarizationSetBy = Automatic
+
+	column DaysInStock
+		dataType: int64
+		formatString: 0
+		lineageTag: c1dcfe1c-b37f-47cf-b3eb-c5a505fade1f
+		summarizeBy: sum
+		sourceColumn: DaysInStock
+
+		annotation SummarizationSetBy = Automatic
+
+	column MinDayInStock
+		dataType: int64
+		formatString: 0
+		lineageTag: dd58433d-3c30-48b7-99fa-8346f4ae12e1
+		summarizeBy: sum
+		sourceColumn: MinDayInStock
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaxDayInStock
+		dataType: int64
+		formatString: 0
+		lineageTag: f361a1ab-902b-4764-b87d-12a6b0328a06
+		summarizeBy: sum
+		sourceColumn: MaxDayInStock
+
+		annotation SummarizationSetBy = Automatic
+
+	column Aging
+		dataType: int64
+		formatString: 0
+		lineageTag: 1f58a485-f348-4690-ad4d-3ee18072b303
+		summarizeBy: sum
+		sourceColumn: Aging
+
+		annotation SummarizationSetBy = Automatic
+
+	column ETLLoadID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fb5fd622-d8a6-4c60-a8aa-7debe64c8d37
+		summarizeBy: count
+		sourceColumn: ETLLoadID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LoadDate
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		lineageTag: a884586e-fc12-404e-994d-c0c05b59a4bf
+		summarizeBy: none
+		sourceColumn: LoadDate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UpdateDate
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		lineageTag: d49dd81d-c78c-431d-9ca7-fe77822d64e6
+		summarizeBy: none
+		sourceColumn: UpdateDate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inventory Row'
+		dataType: int64
+		formatString: 0
+		lineageTag: aa7ec1cb-4fd1-4d29-b709-d4d20080b0c8
+		summarizeBy: sum
+		sourceColumn: Inventory Row
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Last Snapshot' =
+			
+			VAR LastSnapshot = CALCULATE(
+			                        MAXX('Inventory'
+			                            ,'Inventory'[DateKey])
+			                            ,ALL('Inventory')
+			                            )
+			
+			VAR Flag = IF('Inventory'[DateKey] = LastSnapshot, TRUE(), FALSE())
+			
+			RETURN
+			    Flag
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3f5bb833-974e-4415-95ff-9992205bb70c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+	partition Inventory-8fe0b0e4-6abe-4565-8b9c-16bb5a78d3a0 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SourceServer, ContosoRetailDW_DB),
+				    dbo_v_FactInventory = Source{[Schema="dbo",Item="v_FactInventory"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_v_FactInventory,{{"InventoryRow", "Inventory Row"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,56 @@
+table Channel
+	lineageTag: 7319516e-2a2f-4501-8557-8fd12a0a4057
+
+	column ChannelKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a00c0d13-cff7-4505-b301-57c12f20b5ca
+		summarizeBy: none
+		sourceColumn: ChannelKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Channel Label'
+		dataType: string
+		lineageTag: e923340a-9746-451e-9baf-a1ab2b1f91fa
+		summarizeBy: none
+		sourceColumn: Channel Label
+
+		annotation SummarizationSetBy = Automatic
+
+	column Channel
+		dataType: string
+		lineageTag: 389feb78-a788-4a1e-8cb8-efdd72635b2c
+		summarizeBy: none
+		sourceColumn: Channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Channel Description'
+		dataType: string
+		lineageTag: 99c45587-283d-45d3-98b8-71763a98b022
+		summarizeBy: none
+		sourceColumn: Channel Description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Channel-2cde99c2-c87a-4def-8db1-8346a6bfe918 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SourceServer, ContosoRetailDW_DB),
+				    dbo_DimChannel = Source{[Schema="dbo",Item="DimChannel"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(dbo_DimChannel,{"ETLLoadID", "LoadDate", "UpdateDate"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ChannelLabel", "Channel Label"}, {"ChannelName", "Channel"}, {"ChannelDescription", "Channel Description"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = Channel
+
+	annotation PBI_NavigationStepName = Navigation
+

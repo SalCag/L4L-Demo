@@ -1,0 +1,118 @@
+table Promotion
+	lineageTag: 5c3a9a4d-45c2-4fc4-8f4d-21dbbba87b12
+
+	column PromotionKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6e1f3791-89f4-4606-bf31-69e6bdc5b0c2
+		summarizeBy: none
+		sourceColumn: PromotionKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Promotion Label'
+		dataType: string
+		lineageTag: 662aa7ac-4dab-485d-addd-ab3e4f4099de
+		summarizeBy: none
+		sourceColumn: Promotion Label
+
+		annotation SummarizationSetBy = Automatic
+
+	column Promotion
+		dataType: string
+		lineageTag: 053655ff-b4f6-4596-9803-8c18a1edd5cb
+		summarizeBy: none
+		sourceColumn: Promotion
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Promotion Description'
+		dataType: string
+		lineageTag: 3ea86071-a8ba-4170-bd77-77232dbbf9a4
+		summarizeBy: none
+		sourceColumn: Promotion Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Discount Percent'
+		dataType: double
+		lineageTag: 41c82c5e-661b-4df4-a180-33fb7c66a7c8
+		summarizeBy: none
+		sourceColumn: Discount Percent
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Promotion Type'
+		dataType: string
+		lineageTag: 67e67c05-0e73-4b87-a853-c1721cfceced
+		summarizeBy: none
+		sourceColumn: Promotion Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Promotion Category'
+		dataType: string
+		lineageTag: 0cb953db-28be-463e-a0ad-5d42ba54caca
+		summarizeBy: none
+		sourceColumn: Promotion Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column StartDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ed78ad15-f0b6-49b0-b58a-7fd5da627ce5
+		summarizeBy: none
+		sourceColumn: StartDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column EndDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: cb6a2ecb-dd56-43b1-9bf1-cf628ade1d6c
+		summarizeBy: none
+		sourceColumn: EndDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Min Quantity'
+		dataType: int64
+		formatString: 0
+		lineageTag: 471456c6-917d-424d-b3ff-c01924698382
+		summarizeBy: none
+		sourceColumn: Min Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Max Quantity'
+		dataType: int64
+		formatString: 0
+		lineageTag: b48e8634-0183-4148-9a95-02a589cb9287
+		summarizeBy: none
+		sourceColumn: Max Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Promotion-e09d5831-2476-4876-83b3-c73952b3a155 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SourceServer, ContosoRetailDW_DB),
+				    dbo_DimPromotion = Source{[Schema="dbo",Item="DimPromotion"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(dbo_DimPromotion,{"ETLLoadID", "LoadDate", "UpdateDate"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PromotionLabel", "Promotion Label"}, {"PromotionName", "Promotion"}, {"PromotionDescription", "Promotion Description"}, {"DiscountPercent", "Discount Percent"}, {"PromotionType", "Promotion Type"}, {"PromotionCategory", "Promotion Category"}, {"MinQuantity", "Min Quantity"}, {"MaxQuantity", "Max Quantity"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = Promotion
+
+	annotation PBI_NavigationStepName = Navigation
+

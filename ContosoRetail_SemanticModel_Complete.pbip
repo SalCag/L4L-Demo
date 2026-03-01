@@ -3,7 +3,7 @@
   "artifacts": [
     {
       "report": {
-        "path": "ContosoRetail_SemanticModel.Report"
+        "path": "ContosoRetail_SemanticModel_Complete.Report"
       }
     }
   ],

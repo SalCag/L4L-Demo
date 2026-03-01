@@ -2,7 +2,7 @@
   "version": "4.0",
   "datasetReference": {
     "byPath": {
-      "path": "../ContosoRetail_SemanticModel.SemanticModel"
+      "path": "../ContosoRetail_SemanticModel_Complete.SemanticModel"
     }
   }
 }

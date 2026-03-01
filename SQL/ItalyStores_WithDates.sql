@@ -3,14 +3,18 @@ AS
 (SELECT [St].[StoreKey]
         ,[St].[GeographyKey]
         ,[St].[Status]
-        ,DATEADD(yyyy, 13, [St].[OpenDate]) AS  [OpenDate]
+        ,DATEADD(yyyy, 13, CONVERT(date, [St].[OpenDate])) AS  [OpenDate]
     FROM [dbo].[DimStore]   AS  [St]
         INNER JOIN [dbo].[DimGeography]     AS  [G]
             ON [G].[GeographyKey] = [St].[GeographyKey]
         WHERE [G].[RegionCountryName] = 'Italy')
-SELECT [StoreKey]
+, [Result]
+AS
+(SELECT [StoreKey]
         ,[GeographyKey]
         ,CASE [StoreKey]
+            WHEN 223
+                THEN CONVERT(date, '20240701')
             WHEN 224
                 THEN CONVERT(date, '20240531')
             WHEN 226
@@ -34,16 +38,17 @@ SELECT [StoreKey]
             WHEN 223
                 THEN 4  --  Renew
             ELSE 1      --  Comparable
-         END                AS  [L4L_Status]
+         END                AS  [L4L_Status_Src]
     FROM [Source]
-UNION ALL
+    )
 SELECT [StoreKey]
         ,[GeographyKey]
-        ,CONVERT(date, '20240630')
-        ,CONVERT(date, '20301231')  AS  [CloseDate]
-        ,1      AS  [L4L_Status]      --  Comparable
-    FROM [Source]
-        WHERE [StoreKey] = 223
+        ,[OpenDate]
+        ,[CloseDate]
+        ,EOMONTH([OpenDate])    AS  [OpenDate_EOM]
+        ,EOMONTH([CloseDate])   AS  [CloseDate_EOM]
+        ,[L4L_Status]
+    FROM [Result]
 ORDER BY [StoreKey]
             ,[OpenDate];
 

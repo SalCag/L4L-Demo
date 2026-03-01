@@ -1,0 +1,170 @@
+table Bridge_L4L
+	lineageTag: 1d509d5b-3359-432c-b055-d56b1a6c99d6
+
+	column StoreKey
+		dataType: int64
+		formatString: 0
+		lineageTag: b3162965-eb30-4468-9339-3426d4129d7f
+		summarizeBy: count
+		sourceColumn: StoreKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthKey
+		dataType: int64
+		formatString: 0
+		lineageTag: f5280552-5757-4b60-8e6f-2e401ec10616
+		summarizeBy: count
+		sourceColumn: MonthKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthKeyPY
+		dataType: int64
+		formatString: 0
+		lineageTag: a12f2a60-f6ad-45c8-af43-d01f203ec020
+		summarizeBy: sum
+		sourceColumn: MonthKeyPY
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDayOfMonthPY
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 200234b2-d7ec-4fbf-9ce1-bc626a30658e
+		summarizeBy: none
+		sourceColumn: FirstDayOfMonthPY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FirstDayOfMonthPYKey
+		dataType: int64
+		formatString: 0
+		lineageTag: c2ca2f12-0763-4a4a-aa1e-a20d3e4fb962
+		summarizeBy: count
+		sourceColumn: FirstDayOfMonthPYKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastDayOfMonthPY
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5f357112-8d9a-4f7a-aef2-8109e27ccb98
+		summarizeBy: none
+		sourceColumn: LastDayOfMonthPY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LastDayOfMonthPYKey
+		dataType: int64
+		formatString: 0
+		lineageTag: fe8e78ab-7778-4817-afa9-502de36b5ffa
+		summarizeBy: count
+		sourceColumn: LastDayOfMonthPYKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreKey_L4L
+		dataType: int64
+		formatString: 0
+		lineageTag: 479542f3-c705-462e-86ab-a94e86916ebb
+		summarizeBy: sum
+		sourceColumn: StoreKey_L4L
+
+		annotation SummarizationSetBy = Automatic
+
+	column GeographyKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 9d455c04-f410-473b-92bc-57ebbbdf4ae2
+		summarizeBy: none
+		sourceColumn: GeographyKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column OpenDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4ecab41d-784d-45a7-bbf8-43158159649c
+		summarizeBy: none
+		sourceColumn: OpenDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CloseDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 66e2e759-a6b7-4c01-9c79-9b1b220f1d26
+		summarizeBy: none
+		sourceColumn: CloseDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column L4L_Status
+		dataType: string
+		lineageTag: fd789b92-72a4-41da-bca2-e155a708f547
+		summarizeBy: none
+		sourceColumn: L4L_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column OpenDate_EOM
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4a29f596-b71d-4ea5-8b13-211b10603b57
+		summarizeBy: none
+		sourceColumn: OpenDate_EOM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CloseDate_EOM
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 415ce974-1e84-46a3-9b61-5914d732444d
+		summarizeBy: none
+		sourceColumn: CloseDate_EOM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column L4L_Status_Src
+		dataType: int64
+		formatString: 0
+		lineageTag: af06e766-c548-4491-8d43-97a809d6d7b3
+		summarizeBy: sum
+		sourceColumn: L4L_Status_Src
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Bridge_L4L = m
+		mode: import
+		source =
+				let
+				    Source = Store,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"StoreKey"}),
+				    #"Added L4L_Months" = Table.AddColumn(#"Removed Other Columns", "L4L_Month", each L4L_Months),
+				    #"Expanded L4L_Months" = Table.ExpandTableColumn(#"Added L4L_Months", "L4L_Month", {"MonthKey", "MonthKeyPY", "FirstDayOfMonthPY", "FirstDayOfMonthPYKey", "LastDayOfMonthPY", "LastDayOfMonthPYKey"}, {"MonthKey", "MonthKeyPY", "FirstDayOfMonthPY", "FirstDayOfMonthPYKey", "LastDayOfMonthPY", "LastDayOfMonthPYKey"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded L4L_Months",{{"MonthKey", Int64.Type}, {"MonthKeyPY", Int64.Type}, {"FirstDayOfMonthPYKey", Int64.Type}, {"LastDayOfMonthPYKey", Int64.Type}, {"FirstDayOfMonthPY", type date}, {"LastDayOfMonthPY", type date}}),
+				    #"Merged L4L_Dates" = Table.NestedJoin(#"Changed Type", {"StoreKey"}, L4L_Dates, {"StoreKey"}, "L4L_Dates", JoinKind.LeftOuter),
+				    #"Expanded  L4L_Dates" = Table.ExpandTableColumn(#"Merged L4L_Dates", "L4L_Dates", {"StoreKey", "GeographyKey", "OpenDate", "CloseDate", "OpenDate_EOM", "CloseDate_EOM", "L4L_Status_Src"}, {"StoreKey_L4L", "GeographyKey", "OpenDate", "CloseDate", "OpenDate_EOM", "CloseDate_EOM", "L4L_Status_Src"}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Expanded  L4L_Dates", "L4L_Status", each if [StoreKey_L4L] = null then 1
+				else if [OpenDate] >= [FirstDayOfMonthPY] and [CloseDate] > [LastDayOfMonthPY] then 2
+				else 1)
+				in
+				    #"Added Conditional Column"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

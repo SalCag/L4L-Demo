@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
-  "name": "67b310df6719177ee3f7",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "7b8c702ea90eb0155e89",
   "position": {
     "x": 0,
-    "y": 102.14059531348954,
-    "z": 2000,
-    "height": 31.614946168461049,
+    "y": 47.714748784440843,
+    "z": 1000,
+    "height": 31.809832522960562,
     "width": 1280,
-    "tabOrder": 2000
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "All Measures"
                     }
                   },
-                  "Property": "_Current Date Title"
+                  "Property": "Last Update"
                 }
               },
-              "queryRef": "All Measures._Current Date Title",
-              "nativeQueryRef": "_Current Date Title"
+              "queryRef": "All Measures.Last Update",
+              "nativeQueryRef": "Last Update"
             }
           ]
         }

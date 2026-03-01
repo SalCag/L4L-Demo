@@ -9,7 +9,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["Date","Channel","Currency","Promotion","Product","Geography","Store","Retail Sales","Exchange Rate","Inventory","All Measures","Alternative Categories","Brand Colors","Scaling","Retail Measures","Last Update","SourceServer","ContosoRetailDW_DB","Test_Demo_DB"]
+annotation PBI_QueryOrder = ["Date","Channel","Currency","Promotion","Product","Geography","Store","Retail Sales","Exchange Rate","Inventory","All Measures","Alternative Categories","Brand Colors","Scaling","Retail Measures","Last Update","SourceServer","ContosoRetailDW_DB","Test_Demo_DB","L4L_Dates","L4L_Months","Bridge_L4L","DIM_L4L"]
 
 annotation __TEdtr = 1
 
@@ -37,6 +37,8 @@ ref table 'Alternative Categories'
 ref table 'Brand Colors'
 ref table Scaling
 ref table 'Last Update'
+ref table Bridge_L4L
+ref table DIM_L4L
 
 ref role CustomerOLS
 

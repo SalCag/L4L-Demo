@@ -14,10 +14,6 @@ relationship 50d295e1-f034-4aff-8e06-a07ed85b6441
 	fromColumn: 'Retail Sales'.PromotionKey
 	toColumn: Promotion.PromotionKey
 
-relationship cbfd7217-17d4-48b2-b867-73302def5346
-	fromColumn: 'Retail Sales'.StoreKey
-	toColumn: Store.StoreKey
-
 relationship accc154e-4139-4366-91d1-90fbb121556e
 	fromColumn: 'Retail Sales'.ProductKey
 	toColumn: Product.ProductKey
@@ -59,16 +55,15 @@ relationship 348859ff-4aae-4dc7-abd9-f71a8c6e25e3
 	fromColumn: Product.BrandColor
 	toColumn: 'Brand Colors'.BrandColor
 
-relationship AutoDetected_4f2dcd17-f83e-4291-b5d9-d0ea43b7ab95
-	fromColumn: Bridge_L4L.GeographyKey
-	toColumn: Geography.GeographyKey
+relationship d396d982-1ea8-61ca-74d3-161ba0b389f5
+	fromColumn: 'Retail Sales'.StoreMonthKey
+	toColumn: Bridge_L4L.StoreMonthKey
 
-relationship AutoDetected_4f99e0ac-05fa-494c-9ec5-eef5f8868d76
-	isActive: false
+relationship AutoDetected_a635f981-e75e-462c-b0e3-7f361116581e
+	fromColumn: Bridge_L4L.L4LKey
+	toColumn: DIM_L4L.L4LKey
+
+relationship AutoDetected_30f4f34e-d5ce-426f-8a44-c03b7405d059
 	fromColumn: Bridge_L4L.StoreKey
 	toColumn: Store.StoreKey
-
-relationship 2f3fb614-79d8-10eb-38b9-8c1c81b5fd4b
-	fromColumn: Bridge_L4L.L4L_Status
-	toColumn: DIM_L4L.L4LKey
 

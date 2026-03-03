@@ -32,7 +32,7 @@ table 'Retail Sales'
 		isHidden
 		formatString: 0
 		lineageTag: 12b9fd55-d044-4704-8deb-b8b68c5d7a0c
-		summarizeBy: none
+		summarizeBy: count
 		sourceColumn: StoreKey
 
 		changedProperty = IsHidden
@@ -198,7 +198,7 @@ table 'Retail Sales'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database(SourceServer, ContosoRetailDW_DB, [Query="SELECT [F].[SaleLineCounter]    AS  [Sale Line Counter]#(lf)        ,CONVERT(date, DATEADD(yyyy, 16, [F].[DateKey]))     AS  [DateKey]#(lf)        ,[F].[channelKey]#(lf)        ,[F].[StoreKey]#(lf)        ,CONCAT(CONVERT(nvarchar(25), [F].[StoreKey])#(lf)                ,'_'#(lf)                ,CONVERT(nvarchar(25), YEAR([F].[DateKey]))#(lf)                ,RIGHT('00' + CONVERT(nvarchar(25), MONTH([F].[DateKey])), 2)#(lf)                )               AS  [StoreMonthKey]#(lf)        ,[F].[ProductKey]#(lf)        ,[F].[PromotionKey]#(lf)        ,[F].[CurrencyKey]#(lf)        ,[F].[UnitCost]#(lf)        ,[F].[UnitPrice]#(lf)        ,[F].[SalesQuantity]#(lf)        ,[F].[ReturnQuantity]#(lf)        ,[F].[ReturnAmount]#(lf)        ,[F].[DiscountQuantity]#(lf)        ,[F].[DiscountAmount]#(lf)        ,[F].[TotalCost]#(lf)        ,[F].[SalesAmount]#(lf)        ,[F].[DateKeyYear]#(lf)    FROM [dbo].[v_FactSales]    AS  [F];#(lf)"]),
+				    Source = Sql.Database(SourceServer, ContosoRetailDW_DB, [Query="SELECT [F].[SaleLineCounter]    AS  [Sale Line Counter]#(lf)        ,CONVERT(date, DATEADD(yyyy, 16, [F].[DateKey]))     AS  [DateKey]#(lf)        ,[F].[channelKey]#(lf)        ,[F].[StoreKey]#(lf)        ,CONCAT(CONVERT(nvarchar(25), [F].[StoreKey])#(lf)                ,'_'#(lf)                ,CONVERT(nvarchar(25), YEAR(CONVERT(date, DATEADD(yyyy, 16, [F].[DateKey]))))#(lf)                ,RIGHT('00' + CONVERT(nvarchar(25), MONTH(CONVERT(date, DATEADD(yyyy, 16, [F].[DateKey])))), 2)#(lf)                )               AS  [StoreMonthKey]#(lf)        ,[F].[ProductKey]#(lf)        ,[F].[PromotionKey]#(lf)        ,[F].[CurrencyKey]#(lf)        ,[F].[UnitCost]#(lf)        ,[F].[UnitPrice]#(lf)        ,[F].[SalesQuantity]#(lf)        ,[F].[ReturnQuantity]#(lf)        ,[F].[ReturnAmount]#(lf)        ,[F].[DiscountQuantity]#(lf)        ,[F].[DiscountAmount]#(lf)        ,[F].[TotalCost]#(lf)        ,[F].[SalesAmount]#(lf)        ,[F].[DateKeyYear]#(lf)    FROM [dbo].[v_FactSales]    AS  [F];#(lf)"]),
 				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"DateKey", type date}})
 				in
 				    #"Changed Type"

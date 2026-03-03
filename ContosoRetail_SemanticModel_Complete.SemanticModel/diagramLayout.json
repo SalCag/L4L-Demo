@@ -5,7 +5,7 @@
       "ordinal": 0,
       "scrollPosition": {
         "x": 0,
-        "y": 367.2588555858311
+        "y": 681.15531335149876
       },
       "nodes": [
         {
@@ -59,10 +59,11 @@
         },
         {
           "location": {
-            "x": 594.797,
-            "y": 1108.55
+            "x": 614.67710899182566,
+            "y": 1079.2529972752045
           },
           "nodeIndex": "Geography",
+          "nodeLineageTag": "9bb7fb9d-3643-448c-8fe9-acbebcca792c",
           "size": {
             "height": 293,
             "width": 238
@@ -512,8 +513,8 @@
         },
         {
           "location": {
-            "x": -52,
-            "y": 87.5
+            "x": 0,
+            "y": 26.5
           },
           "nodeIndex": "Store",
           "nodeLineageTag": "1be75310-bd39-4514-9fa2-96d946389429",
@@ -543,6 +544,19 @@
           },
           "nodeIndex": "Bridge_L4L",
           "nodeLineageTag": "1d509d5b-3359-432c-b055-d56b1a6c99d6",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": -74,
+            "y": 668.5
+          },
+          "nodeIndex": "Geography",
+          "nodeLineageTag": "9bb7fb9d-3643-448c-8fe9-acbebcca792c",
           "size": {
             "height": 300,
             "width": 234

@@ -45,8 +45,9 @@ expression L4L_Dates =
 expression L4L_Months =
 		let
 		    Source = Date,
-		    #"Removed Other Columns" = Table.SelectColumns(Source,{"MonthKey", "MonthKeyPY", "FirstDayOfMonthPY", "FirstDayOfMonthPYKey", "LastDayOfMonthPY", "LastDayOfMonthPYKey"}),
-		    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+		    #"Select Columns" = Table.SelectColumns(Source,{"MonthKey", "MonthKeyPY", "FirstDayOfMonth", "LastDayOfMonth", "FirstDayOfMonthPY", "LastDayOfMonthPY"}),
+		    #"Changed Type to Date" = Table.TransformColumnTypes(#"Select Columns",{{"FirstDayOfMonth", type date}, {"LastDayOfMonth", type date}, {"FirstDayOfMonthPY", type date}, {"LastDayOfMonthPY", type date}}),
+		    #"Removed Duplicates" = Table.Distinct(#"Changed Type to Date")
 		in
 		    #"Removed Duplicates"
 	lineageTag: 79988910-f5a1-4e6d-83cb-828321b83090

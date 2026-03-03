@@ -4,8 +4,8 @@ SELECT [F].[SaleLineCounter]    AS  [Sale Line Counter]
         ,[F].[StoreKey]
         ,CONCAT(CONVERT(nvarchar(25), [F].[StoreKey])
                 ,'_'
-                ,CONVERT(nvarchar(25), YEAR([F].[DateKey]))
-                ,RIGHT('00' + CONVERT(nvarchar(25), MONTH([F].[DateKey])), 2)
+                ,CONVERT(nvarchar(25), YEAR(CONVERT(date, DATEADD(yyyy, 16, [F].[DateKey]))))
+                ,RIGHT('00' + CONVERT(nvarchar(25), MONTH(CONVERT(date, DATEADD(yyyy, 16, [F].[DateKey])))), 2)
                 )               AS  [StoreMonthKey]
         ,[F].[ProductKey]
         ,[F].[PromotionKey]

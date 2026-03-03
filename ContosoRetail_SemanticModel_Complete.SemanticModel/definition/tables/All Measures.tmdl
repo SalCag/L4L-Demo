@@ -137,6 +137,17 @@ table 'All Measures'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	measure 'Retail Sales (YTD)' = ```
+			
+			    CALCULATE([Retail Sales]
+			                ,'Time Intelligence'[Time Measures] = "YTD"
+			                )
+			```
+		displayFolder: Sales
+		lineageTag: 0c60f745-1541-4b13-af65-429862996c5d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	partition 'All Measures-73e585cd-90fc-476f-af6f-051eddf38311' = m
 		mode: import
 		source =

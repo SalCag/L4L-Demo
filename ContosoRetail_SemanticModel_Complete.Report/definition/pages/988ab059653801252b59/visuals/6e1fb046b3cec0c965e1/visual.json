@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
   "name": "6e1fb046b3cec0c965e1",
   "position": {
-    "x": 322.74285714285713,
-    "y": 210.28571428571428,
+    "x": 10.107681263460156,
+    "y": 210.42354630294327,
     "z": 1,
-    "height": 460.8,
-    "width": 957.25714285714287,
+    "height": 460.35893754486716,
+    "width": 1269.8923187365397,
     "tabOrder": 1
   },
   "visual": {
@@ -161,6 +161,20 @@
               },
               "queryRef": "All Measures.Retail Sales",
               "nativeQueryRef": "Retail Sales"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "All Measures"
+                    }
+                  },
+                  "Property": "Retail Sales (YTD)"
+                }
+              },
+              "queryRef": "All Measures.Retail Sales (YTD)",
+              "nativeQueryRef": "Retail Sales (YTD)"
             }
           ]
         }
@@ -351,7 +365,6 @@
                           }
                         }
                       ],
-                      "isToggled": true,
                       "children": [
                         {
                           "identityValues": [
@@ -407,7 +420,6 @@
                           }
                         }
                       ],
-                      "isToggled": true,
                       "children": [
                         {
                           "identityValues": [
@@ -441,7 +453,6 @@
                           }
                         }
                       ],
-                      "isToggled": true,
                       "children": [
                         {
                           "identityValues": [
@@ -485,7 +496,6 @@
                               }
                             }
                           ],
-                          "isToggled": true,
                           "children": [
                             {
                               "identityValues": [

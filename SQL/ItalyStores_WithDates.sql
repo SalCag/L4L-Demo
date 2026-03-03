@@ -13,7 +13,7 @@ AS
 (SELECT [StoreKey]
         ,[GeographyKey]
         ,CASE [StoreKey]
-            WHEN 223
+            WHEN 225
                 THEN CONVERT(date, '20240701')
             WHEN 224
                 THEN CONVERT(date, '20240531')
@@ -24,7 +24,7 @@ AS
         ,CASE [StoreKey]
             WHEN 222
                 THEN CONVERT(date, '20240831')
-            WHEN 223
+            WHEN 225
                 THEN CONVERT(date, '20240331')
             ELSE CONVERT(date, '20301231')
          END                AS  [CloseDate]
@@ -35,8 +35,8 @@ AS
                 THEN 2  --  Opening
             WHEN 222
                 THEN 3  --  Closing
-            WHEN 223
-                THEN 4  --  Renew
+            WHEN 225
+                THEN 4  --  Refresh
             ELSE 1      --  Comparable
          END                AS  [L4L_Status_Src]
     FROM [Source]

@@ -38,8 +38,8 @@ table Bridge_L4L
 				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded L4L_Months",{{"MonthKey", Int64.Type}, {"MonthKeyPY", Int64.Type}, {"FirstDayOfMonthPY", type date}, {"LastDayOfMonthPY", type date}, {"FirstDayOfMonth", type date}, {"LastDayOfMonth", type date}}),
 				    #"Merged L4L_Dates" = Table.NestedJoin(#"Changed Type", {"StoreKey"}, L4L_Dates, {"StoreKey"}, "L4L_Dates", JoinKind.LeftOuter),
 				    #"Expanded  L4L_Dates" = Table.ExpandTableColumn(#"Merged L4L_Dates", "L4L_Dates", {"StoreKey", "GeographyKey", "OpenDate", "CloseDate", "OpenDate_EOM", "CloseDate_EOM", "L4L_Status_Src"}, {"StoreKey_L4L", "GeographyKey", "OpenDate", "CloseDate", "OpenDate_EOM", "CloseDate_EOM", "L4L_Status_Src"}),
-				    #"Added YearDiff_Open" = Table.AddColumn(#"Expanded  L4L_Dates", "YearDiff_Open", each Date.Year([LastDayOfMonth]) - Date.Year([OpenDate])),
-				    #"Added YearDiff_Close" = Table.AddColumn(#"Added YearDiff_Open", "YearDiff_Close", each Date.Year([LastDayOfMonth]) - Date.Year([CloseDate])),
+				    #"Added YearDiff_Open" = Table.AddColumn(#"Expanded  L4L_Dates", "YearDiff_Open", each Date.Year([LastDayOfMonth]) - Date.Year([OpenDate]), Int64.Type),
+				    #"Added YearDiff_Close" = Table.AddColumn(#"Added YearDiff_Open", "YearDiff_Close", each Date.Year([LastDayOfMonth]) - Date.Year([CloseDate]), Int64.Type),
 				    #"Added L4L_Status_Int" = Table.AddColumn(#"Added YearDiff_Close", "L4L_Status_Int", each if [StoreKey_L4L] = null then 1
 				else if [YearDiff_Open] = 1 or [YearDiff_Close] = 1 then [L4L_Status_Src]
 				else 1),
@@ -53,12 +53,11 @@ table Bridge_L4L
 				and ([LastDayOfMonthPY] >= [CloseDate_EOM] and [FirstDayOfMonthPY] <= [OpenDate_EOM])
 				then 4
 				else 1),
-				    #"Filtered Rows" = Table.SelectRows(#"Added L4LKey", each true),
-				    #"Changed Type1" = Table.TransformColumnTypes(#"Filtered Rows",{{"L4LKey", Int64.Type}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added L4LKey",{{"L4LKey", Int64.Type}}),
 				    #"Added StoreMonthKey" = Table.AddColumn(#"Changed Type1", "StoreMonthKey", each Text.From([StoreKey]) & "_" & Text.From([MonthKey]), type text),
-				    #"Select needed columns" = Table.SelectColumns(#"Added StoreMonthKey",{"StoreKey", "L4LKey", "StoreMonthKey"})
+				    #"Removed unneeded columns" = Table.SelectColumns(#"Added StoreMonthKey",{"StoreKey", "L4LKey", "StoreMonthKey"})
 				in
-				    #"Select needed columns"
+				    #"Removed unneeded columns"
 
 	annotation PBI_NavigationStepName = Navigation
 

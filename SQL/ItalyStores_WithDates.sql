@@ -1,7 +1,7 @@
 WITH [Source]
 AS
 (SELECT [St].[StoreKey]
-        ,[St].[GeographyKey]
+        --,[St].[GeographyKey]
         ,[St].[Status]
         ,DATEADD(yyyy, 13, CONVERT(date, [St].[OpenDate])) AS  [OpenDate]
     FROM [dbo].[DimStore]   AS  [St]
@@ -11,7 +11,7 @@ AS
 , [Result]
 AS
 (SELECT [StoreKey]
-        ,[GeographyKey]
+        --,[GeographyKey]
         ,CASE [StoreKey]
             WHEN 225
                 THEN CONVERT(date, '20240701')
@@ -42,13 +42,14 @@ AS
     FROM [Source]
     )
 SELECT [StoreKey]
-        ,[GeographyKey]
+        --,[GeographyKey]
         ,[OpenDate]
         ,[CloseDate]
         ,EOMONTH([OpenDate])    AS  [OpenDate_EOM]
         ,EOMONTH([CloseDate])   AS  [CloseDate_EOM]
         ,[L4L_Status_Src]
     FROM [Result]
+    WHERE [StoreKey] != 223
 ORDER BY [StoreKey]
             ,[OpenDate];
 

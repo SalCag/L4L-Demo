@@ -14,18 +14,18 @@ AS
         --,[GeographyKey]
         ,CASE [StoreKey]
             WHEN 225
-                THEN CONVERT(date, '20240701')
+                THEN CONVERT(date, '20240713')
             WHEN 224
-                THEN CONVERT(date, '20240531')
+                THEN CONVERT(date, '20240524')
             WHEN 226
-                THEN CONVERT(date, '20241031')
+                THEN CONVERT(date, '20241018')
             ELSE [OpenDate]
          END                AS  [OpenDate]
         ,CASE [StoreKey]
             WHEN 222
-                THEN CONVERT(date, '20240831')
+                THEN CONVERT(date, '20240818')
             WHEN 225
-                THEN CONVERT(date, '20240331')
+                THEN CONVERT(date, '20240303')
             ELSE CONVERT(date, '20301231')
          END                AS  [CloseDate]
         ,CASE [StoreKey]
@@ -52,6 +52,4 @@ SELECT [StoreKey]
     WHERE [StoreKey] != 223
 ORDER BY [StoreKey]
             ,[OpenDate];
-
-
 

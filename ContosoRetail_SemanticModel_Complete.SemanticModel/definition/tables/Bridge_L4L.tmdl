@@ -1,6 +1,15 @@
 table Bridge_L4L
 	lineageTag: 1d509d5b-3359-432c-b055-d56b1a6c99d6
 
+	column StoreKey
+		dataType: int64
+		formatString: 0
+		lineageTag: bdbeeb8f-cfe4-41d8-89b3-d1665f19585c
+		summarizeBy: none
+		sourceColumn: StoreKey
+
+		annotation SummarizationSetBy = Automatic
+
 	column StoreMonthKey
 		dataType: string
 		lineageTag: b8209002-022f-4568-8671-e62aa212774e
@@ -15,15 +24,6 @@ table Bridge_L4L
 		lineageTag: 88de615f-4cdd-4deb-b204-2c6760d47653
 		summarizeBy: none
 		sourceColumn: L4LKey
-
-		annotation SummarizationSetBy = Automatic
-
-	column StoreKey
-		dataType: int64
-		formatString: 0
-		lineageTag: bdbeeb8f-cfe4-41d8-89b3-d1665f19585c
-		summarizeBy: none
-		sourceColumn: StoreKey
 
 		annotation SummarizationSetBy = Automatic
 
@@ -44,13 +44,13 @@ table Bridge_L4L
 				else if [YearDiff_Open] = 1 or [YearDiff_Close] = 1 then [L4L_Status_Src]
 				else 1),
 				    #"Added L4LKey" = Table.AddColumn(#"Added L4L_Status_Int", "L4LKey", each if [L4L_Status_Int] = 2
-				and [LastDayOfMonthPY] <= [OpenDate_EOM]
+				and [FirstDayOfMonthPY] <= [OpenDate]
 				then 2
 				else if [L4L_Status_Int] = 3
-				and [LastDayOfMonthPY] >= [CloseDate_EOM]
+				and [LastDayOfMonthPY] >= [CloseDate]
 				then 3
 				else if [L4L_Status_Int] = 4
-				and ([LastDayOfMonthPY] >= [CloseDate_EOM] and [FirstDayOfMonthPY] <= [OpenDate_EOM])
+				and ([LastDayOfMonthPY] >= [CloseDate] and [FirstDayOfMonthPY] <= [OpenDate])
 				then 4
 				else 1),
 				    #"Changed Type1" = Table.TransformColumnTypes(#"Added L4LKey",{{"L4LKey", Int64.Type}}),

@@ -23,6 +23,9 @@ table DIM_L4L
 		lineageTag: 4713eaf7-f2b5-41af-9039-1c56ae91e1b2
 		summarizeBy: none
 		sourceColumn: L4L_LongText
+		sortByColumn: L4LKey
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -33,6 +36,17 @@ table DIM_L4L
 		sourceColumn: Reason
 
 		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'L4L Hierarchy'
+		lineageTag: 116ac076-7dc0-4e16-90a6-3db77566dfa9
+
+		level L4L
+			lineageTag: fcb86707-e647-4b86-a10c-5b81ebf866db
+			column: L4L_LongText
+
+		level 'L4L Detail'
+			lineageTag: 1bf88b73-dc1f-4d3f-a72f-2bb0140b5156
+			column: L4L_Text
 
 	partition DIM_L4L = m
 		mode: import

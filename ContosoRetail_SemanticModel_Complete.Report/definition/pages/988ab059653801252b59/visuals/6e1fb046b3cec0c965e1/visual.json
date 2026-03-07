@@ -41,17 +41,17 @@
                     "Hierarchy": {
                       "Expression": {
                         "SourceRef": {
-                          "Entity": "Geography"
+                          "Entity": "DIM_L4L"
                         }
                       },
-                      "Hierarchy": "Geography"
+                      "Hierarchy": "L4L Hierarchy"
                     }
                   },
-                  "Level": "Continent"
+                  "Level": "L4L"
                 }
               },
-              "queryRef": "Geography.Geography.Continent",
-              "nativeQueryRef": "Geography Continent",
+              "queryRef": "DIM_L4L.L4L Hierarchy.L4L_LongText",
+              "nativeQueryRef": "L4L Hierarchy L4L_LongText",
               "active": true
             },
             {
@@ -61,57 +61,17 @@
                     "Hierarchy": {
                       "Expression": {
                         "SourceRef": {
-                          "Entity": "Geography"
+                          "Entity": "DIM_L4L"
                         }
                       },
-                      "Hierarchy": "Geography"
+                      "Hierarchy": "L4L Hierarchy"
                     }
                   },
-                  "Level": "Region Country"
+                  "Level": "L4L Detail"
                 }
               },
-              "queryRef": "Geography.Geography.Region Country",
-              "nativeQueryRef": "Geography Region Country",
-              "active": true
-            },
-            {
-              "field": {
-                "HierarchyLevel": {
-                  "Expression": {
-                    "Hierarchy": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Geography"
-                        }
-                      },
-                      "Hierarchy": "Geography"
-                    }
-                  },
-                  "Level": "State Province"
-                }
-              },
-              "queryRef": "Geography.Geography.State Province",
-              "nativeQueryRef": "Geography State Province",
-              "active": true
-            },
-            {
-              "field": {
-                "HierarchyLevel": {
-                  "Expression": {
-                    "Hierarchy": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Geography"
-                        }
-                      },
-                      "Hierarchy": "Geography"
-                    }
-                  },
-                  "Level": "City"
-                }
-              },
-              "queryRef": "Geography.Geography.City",
-              "nativeQueryRef": "Geography City",
+              "queryRef": "DIM_L4L.L4L Hierarchy.L4L Detail",
+              "nativeQueryRef": "L4L Hierarchy L4L Detail",
               "active": true
             },
             {
@@ -127,21 +87,6 @@
               },
               "queryRef": "Store.Store",
               "nativeQueryRef": "Store",
-              "active": true
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Store"
-                    }
-                  },
-                  "Property": "StoreKey"
-                }
-              },
-              "queryRef": "Store.StoreKey",
-              "nativeQueryRef": "StoreKey",
               "active": true
             }
           ]
@@ -161,23 +106,39 @@
               },
               "queryRef": "All Measures.Retail Sales",
               "nativeQueryRef": "Retail Sales"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "All Measures"
-                    }
-                  },
-                  "Property": "Retail Sales (YTD)"
-                }
-              },
-              "queryRef": "All Measures.Retail Sales (YTD)",
-              "nativeQueryRef": "Retail Sales (YTD)"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_L4L"
+                  }
+                },
+                "Property": "L4L_LongText"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Store"
+                  }
+                },
+                "Property": "Store"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
       }
     },
     "expansionStates": [
@@ -188,18 +149,17 @@
         "levels": [
           {
             "queryRefs": [
-              "Geography.Geography.Continent"
+              "DIM_L4L.L4L Hierarchy.L4L_LongText"
             ],
-            "isCollapsed": true,
             "identityKeys": [
               {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Geography"
+                      "Entity": "DIM_L4L"
                     }
                   },
-                  "Property": "Continent"
+                  "Property": "L4L_LongText"
                 }
               }
             ],
@@ -207,58 +167,7 @@
           },
           {
             "queryRefs": [
-              "Geography.Geography.Region Country"
-            ],
-            "isCollapsed": true,
-            "identityKeys": [
-              {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Geography"
-                    }
-                  },
-                  "Property": "Region Country"
-                }
-              }
-            ],
-            "isPinned": true
-          },
-          {
-            "queryRefs": [
-              "Geography.Geography.State Province"
-            ],
-            "isCollapsed": true,
-            "identityKeys": [
-              {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Geography"
-                    }
-                  },
-                  "Property": "State Province"
-                }
-              }
-            ],
-            "isPinned": true
-          },
-          {
-            "queryRefs": [
-              "Geography.Geography.City"
-            ],
-            "isCollapsed": true,
-            "identityKeys": [
-              {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Geography"
-                    }
-                  },
-                  "Property": "City"
-                }
-              }
+              "DIM_L4L.L4L Hierarchy.L4L Detail"
             ],
             "isPinned": true
           },
@@ -280,243 +189,9 @@
               }
             ],
             "isPinned": true
-          },
-          {
-            "queryRefs": [
-              "Store.StoreKey"
-            ],
-            "isCollapsed": true,
-            "isPinned": true
           }
         ],
-        "root": {
-          "children": [
-            {
-              "identityValues": [
-                {
-                  "Literal": {
-                    "Value": "null"
-                  }
-                }
-              ],
-              "isToggled": true,
-              "children": [
-                {
-                  "identityValues": [
-                    {
-                      "Literal": {
-                        "Value": "null"
-                      }
-                    }
-                  ],
-                  "isToggled": true,
-                  "children": [
-                    {
-                      "identityValues": [
-                        {
-                          "Literal": {
-                            "Value": "null"
-                          }
-                        }
-                      ],
-                      "isToggled": true,
-                      "children": [
-                        {
-                          "identityValues": [
-                            {
-                              "Literal": {
-                                "Value": "null"
-                              }
-                            }
-                          ],
-                          "isToggled": true
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "identityValues": [
-                {
-                  "Literal": {
-                    "Value": "'Europe'"
-                  }
-                }
-              ],
-              "isToggled": true,
-              "children": [
-                {
-                  "identityValues": [
-                    {
-                      "Literal": {
-                        "Value": "'Italy'"
-                      }
-                    }
-                  ],
-                  "isToggled": true,
-                  "children": [
-                    {
-                      "identityValues": [
-                        {
-                          "Literal": {
-                            "Value": "'Roma'"
-                          }
-                        }
-                      ],
-                      "children": [
-                        {
-                          "identityValues": [
-                            {
-                              "Literal": {
-                                "Value": "'Roma'"
-                              }
-                            }
-                          ],
-                          "isToggled": true
-                        }
-                      ]
-                    },
-                    {
-                      "identityValues": [
-                        {
-                          "Literal": {
-                            "Value": "'Province of Turin'"
-                          }
-                        }
-                      ],
-                      "isToggled": true,
-                      "children": [
-                        {
-                          "identityValues": [
-                            {
-                              "Literal": {
-                                "Value": "'Torino'"
-                              }
-                            }
-                          ],
-                          "isToggled": true,
-                          "children": [
-                            {
-                              "identityValues": [
-                                {
-                                  "Literal": {
-                                    "Value": "'Contoso Torino Store'"
-                                  }
-                                }
-                              ],
-                              "isToggled": true
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "identityValues": [
-                        {
-                          "Literal": {
-                            "Value": "'Venice'"
-                          }
-                        }
-                      ],
-                      "children": [
-                        {
-                          "identityValues": [
-                            {
-                              "Literal": {
-                                "Value": "'Venezia'"
-                              }
-                            }
-                          ],
-                          "isToggled": true,
-                          "children": [
-                            {
-                              "identityValues": [
-                                {
-                                  "Literal": {
-                                    "Value": "'Contoso Venezia Store'"
-                                  }
-                                }
-                              ],
-                              "isToggled": true
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "identityValues": [
-                        {
-                          "Literal": {
-                            "Value": "'Province of Florence'"
-                          }
-                        }
-                      ],
-                      "children": [
-                        {
-                          "identityValues": [
-                            {
-                              "Literal": {
-                                "Value": "'Firenze'"
-                              }
-                            }
-                          ],
-                          "isToggled": true,
-                          "children": [
-                            {
-                              "identityValues": [
-                                {
-                                  "Literal": {
-                                    "Value": "'Contoso Firenze Store'"
-                                  }
-                                }
-                              ],
-                              "isToggled": true
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "identityValues": [
-                        {
-                          "Literal": {
-                            "Value": "'Lombardia'"
-                          }
-                        }
-                      ],
-                      "isToggled": true,
-                      "children": [
-                        {
-                          "identityValues": [
-                            {
-                              "Literal": {
-                                "Value": "'Milan'"
-                              }
-                            }
-                          ],
-                          "children": [
-                            {
-                              "identityValues": [
-                                {
-                                  "Literal": {
-                                    "Value": "'Contoso Milan Store'"
-                                  }
-                                }
-                              ],
-                              "isToggled": true
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
+        "root": {}
       }
     ],
     "drillFilterOtherVisuals": true

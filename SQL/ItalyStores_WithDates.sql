@@ -52,9 +52,10 @@ SELECT [StoreKey]
         --,[GeographyKey]
         ,[OpenDate]
         ,[CloseDate]
-        ,EOMONTH([OpenDate])    AS  [OpenDate_EOM]
-        ,EOMONTH([CloseDate])   AS  [CloseDate_EOM]
+        --,EOMONTH([OpenDate])    AS  [OpenDate_EOM]
+        --,EOMONTH([CloseDate])   AS  [CloseDate_EOM]
         ,[L4L_Status_Src]
+        ,1
     FROM [Result]
     WHERE [StoreKey] != 223
 ORDER BY [StoreKey]

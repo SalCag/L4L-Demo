@@ -38,13 +38,17 @@ table Bridge_L4L
 				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded L4L_Months",{{"MonthKey", Int64.Type}, {"MonthKeyPY", Int64.Type}, {"FirstDayOfMonthPY", type date}, {"LastDayOfMonthPY", type date}, {"FirstDayOfMonth", type date}, {"LastDayOfMonth", type date}}),
 				    #"Added StoreMonthKey" = Table.AddColumn(#"Changed Type", "StoreMonthKey", each Text.From([StoreKey]) & "_" & Text.From([MonthKey]), type text),
 				    #"Merged L4L_Dates" = Table.NestedJoin(#"Added StoreMonthKey", {"StoreKey"}, L4L_Dates, {"StoreKey"}, "L4L_Dates", JoinKind.LeftOuter),
-				    #"Expanded  L4L_Dates" = Table.ExpandTableColumn(#"Merged L4L_Dates", "L4L_Dates", {"StoreKey", "GeographyKey", "OpenDate", "CloseDate", "OpenDate_EOM", "CloseDate_EOM", "L4L_Status_Src"}, {"StoreKey_L4L", "GeographyKey", "OpenDate", "CloseDate", "OpenDate_EOM", "CloseDate_EOM", "L4L_Status_Src"}),
+				    #"Expanded  L4L_Dates" = Table.ExpandTableColumn(#"Merged L4L_Dates", "L4L_Dates", {"StoreKey", "OpenDate", "CloseDate", "L4L_Status_Src"}, {"StoreKey_L4L", "OpenDate", "CloseDate", "L4L_Status_Src"}),
 				    #"Added YearDiff_Open" = Table.AddColumn(#"Expanded  L4L_Dates", "YearDiff_Open", each Date.Year([LastDayOfMonth]) - Date.Year([OpenDate]), Int64.Type),
 				    #"Added YearDiff_Close" = Table.AddColumn(#"Added YearDiff_Open", "YearDiff_Close", each Date.Year([LastDayOfMonth]) - Date.Year([CloseDate]), Int64.Type),
 				    #"Added L4L_Status_Int" = Table.AddColumn(#"Added YearDiff_Close", "L4L_Status_Int", each if [StoreKey_L4L] = null then 1
 				else if [YearDiff_Open] = 1 or [YearDiff_Close] = 1 then [L4L_Status_Src]
 				else 1),
-				    #"Added L4LKey" = Table.AddColumn(#"Added L4L_Status_Int", "L4LKey", each if [L4L_Status_Int] = 2
+				    #"Added OpenDate_Corr" = Table.AddColumn(#"Added L4L_Status_Int", "OpenDate_Corr", each if [YearDiff_Open] <> 1 then [FirstDayOfMonth] else [OpenDate], type date),
+				    #"Added CloseDate_Corr" = Table.AddColumn(#"Added OpenDate_Corr", "CloseDate_Corr", each if [YearDiff_Close] <> 1 then [LastDayOfMonth] else [CloseDate], type date),
+				    #"Removed Original Open and Closed Dates" = Table.RemoveColumns(#"Added CloseDate_Corr",{"OpenDate", "CloseDate"}),
+				    #"Renamed Corr Columns" = Table.RenameColumns(#"Removed Original Open and Closed Dates",{{"OpenDate_Corr", "OpenDate"}, {"CloseDate_Corr", "CloseDate"}}),
+				    #"Added L4LKey" = Table.AddColumn(#"Renamed Corr Columns", "L4LKey", each if [L4L_Status_Int] = 2
 				and [FirstDayOfMonthPY] <= [OpenDate]
 				then 2
 				else if [L4L_Status_Int] = 3
@@ -55,10 +59,11 @@ table Bridge_L4L
 				then 4
 				else 1),
 				    #"Added L4L_Check" = Table.AddColumn(#"Added L4LKey", "L4L_Check", each if [L4L_Status_Src] = null or [L4L_Status_Src] = 1
-				   or ([L4L_Status_Src] <> 1 and ([YearDiff_Open] = 1
+				   then true
+				   else if ([L4L_Status_Src] <> 1 and ([YearDiff_Open] = 1
 				   or [YearDiff_Close] = 1 ))
 				   then true
-				   else false, type logical),
+				   else false),
 				    #"Removed L4L_Check = FALSE" = Table.SelectRows(#"Added L4L_Check", each ([L4L_Check] = true)),
 				    #"Changed Type1" = Table.TransformColumnTypes(#"Removed L4L_Check = FALSE",{{"L4LKey", Int64.Type}}),
 				    #"Removed Other Columns1" = Table.SelectColumns(#"Changed Type1",{"StoreKey", "StoreMonthKey", "L4LKey"})

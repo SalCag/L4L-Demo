@@ -1,0 +1,50 @@
+table Bridge_L4L
+	lineageTag: 1d509d5b-3359-432c-b055-d56b1a6c99d6
+
+	column StoreKey
+		dataType: int64
+		formatString: 0
+		lineageTag: bdbeeb8f-cfe4-41d8-89b3-d1665f19585c
+		summarizeBy: none
+		sourceColumn: StoreKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreMonthKey
+		dataType: string
+		lineageTag: b8209002-022f-4568-8671-e62aa212774e
+		summarizeBy: none
+		sourceColumn: StoreMonthKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column L4LKey
+		dataType: double
+		formatString: 0
+		lineageTag: 88de615f-4cdd-4deb-b204-2c6760d47653
+		summarizeBy: none
+		sourceColumn: L4LKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Bridge_L4L = m
+		mode: import
+		source =
+				let
+				    Source = Store,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"StoreKey"}),
+				    #"Added L4L_Months" = Table.AddColumn(#"Removed Other Columns", "L4L_Month", each L4L_Months),
+				    #"Expanded L4L_Months" = Table.ExpandTableColumn(#"Added L4L_Months", "L4L_Month", {"MonthKey", "MonthKeyPY", "FirstDayOfMonth", "LastDayOfMonth", "FirstDayOfMonthPY", "LastDayOfMonthPY"}, {"MonthKey", "MonthKeyPY", "FirstDayOfMonth", "LastDayOfMonth", "FirstDayOfMonthPY", "LastDayOfMonthPY"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded L4L_Months",{{"MonthKey", Int64.Type}, {"MonthKeyPY", Int64.Type}, {"FirstDayOfMonthPY", type date}, {"LastDayOfMonthPY", type date}, {"FirstDayOfMonth", type date}, {"LastDayOfMonth", type date}}),
+				    #"Added StoreMonthKey" = Table.AddColumn(#"Changed Type", "StoreMonthKey", each Text.From([StoreKey]) & "_" & Text.From([MonthKey]), type text),
+				    #"Merged L4L_Dates" = Table.NestedJoin(#"Added StoreMonthKey", {"StoreMonthKey"}, L4L_Dates, {"StoreMonthKey"}, "L4L_Dates", JoinKind.LeftOuter),
+				    #"Expanded  L4L_Dates" = Table.ExpandTableColumn(#"Merged L4L_Dates", "L4L_Dates", {"L4LKey"}, {"L4LKey"}),
+				    #"Replaced empty L4LKey with 1" = Table.ReplaceValue(#"Expanded  L4L_Dates",null,1,Replacer.ReplaceValue,{"L4LKey"}),
+				    #"Removed Other Columns1" = Table.SelectColumns(#"Replaced empty L4LKey with 1",{"StoreKey", "StoreMonthKey", "L4LKey"})
+				in
+				    #"Removed Other Columns1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

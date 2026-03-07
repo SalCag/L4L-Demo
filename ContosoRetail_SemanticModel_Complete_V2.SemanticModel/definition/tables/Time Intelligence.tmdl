@@ -1,0 +1,137 @@
+table 'Time Intelligence'
+	lineageTag: 7f8c12ba-9b16-4506-b20b-0c69e1c68ee6
+
+	calculationGroup
+
+		calculationItem Current = SELECTEDMEASURE()
+
+		calculationItem PY = ```
+				
+				var SalesAmountPY = CALCULATE(SELECTEDMEASURE(),
+				                                    SAMEPERIODLASTYEAR('Date'[Date]),
+				                                    ALL('Date')
+				                                            )
+				
+				RETURN
+				    SalesAmountPY
+				
+				```
+
+			formatStringDefinition = "#,0.00"
+
+		calculationItem YoY = ```
+				VAR PY = CALCULATE(SELECTEDMEASURE()
+				                ,DATEADD('Date'[Date], -1, YEAR)
+				                )
+				    
+				RETURN
+				    SELECTEDMEASURE() - PY
+				    
+				```
+
+			formatStringDefinition = "#,0.00"
+
+		calculationItem 'YoY %' = ```
+				VAR PY = CALCULATE(SELECTEDMEASURE()
+				                    ,DATEADD('Date'[Date], -1, YEAR)
+				                    )
+				    
+				RETURN
+				    DIVIDE(SELECTEDMEASURE() - PY, SELECTEDMEASURE() )
+				```
+
+			formatStringDefinition = "0.00%;-0.00%;0.00%"
+
+		calculationItem PQ =
+				CALCULATE(SELECTEDMEASURE()
+				            ,DATEADD('Date'[Date], -1, QUARTER)
+				            )
+
+			formatStringDefinition = "#,0.00"
+
+		calculationItem QoQ = ```
+				VAR PQ = CALCULATE(SELECTEDMEASURE()
+				                    ,DATEADD('Date'[Date], -1, QUARTER)
+				                    )
+				    
+				RETURN
+				    SELECTEDMEASURE() - PQ
+				    
+				```
+
+			formatStringDefinition = "#,0.00"
+
+		calculationItem 'QoQ %' = ```
+				VAR PQ = CALCULATE(SELECTEDMEASURE()
+				                    ,DATEADD('Date'[Date], -1, QUARTER)
+				                    )
+				    
+				RETURN
+				    DIVIDE(SELECTEDMEASURE() - PQ, SELECTEDMEASURE() )
+				```
+
+			formatStringDefinition = "0.00%;-0.00%;0.00%"
+
+		calculationItem PM =
+				CALCULATE(SELECTEDMEASURE()
+				            ,DATEADD('Date'[Date], -1, MONTH)
+				            )
+
+			formatStringDefinition = "#,0.00"
+
+		calculationItem MoM = ```
+				VAR PM = CALCULATE(SELECTEDMEASURE()
+				                    ,DATEADD('Date'[Date], -1, MONTH)
+				                    )
+				    
+				RETURN
+				    SELECTEDMEASURE() - PM
+				```
+
+			formatStringDefinition = "#,0.00"
+
+		calculationItem 'MoM %' = ```
+				VAR PM = CALCULATE(SELECTEDMEASURE()
+				                    ,DATEADD('Date'[Date], -1, MONTH)
+				                    )
+				    
+				RETURN
+				    DIVIDE(SELECTEDMEASURE() - PM, SELECTEDMEASURE() )
+				```
+
+			formatStringDefinition = "0.00%;-0.00%;0.00%"
+
+		calculationItem YTD = TOTALYTD(SELECTEDMEASURE(), 'Date'[Date])
+
+		calculationItem MTD = TOTALMTD(SELECTEDMEASURE(), 'Date'[Date])
+
+			formatStringDefinition = "#,0.00"
+
+		calculationItem 'Previous Month' =
+				CALCULATE(
+				    SELECTEDMEASURE()
+				    ,PARALLELPERIOD('Date'[Date]
+				                    ,-1
+				                    ,MONTH)
+				    )
+
+			formatStringDefinition = "#,0.00"
+
+	column 'Time Measures'
+		dataType: string
+		lineageTag: 9d935221-c8d7-4d91-ad82-0bc3a2368649
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		lineageTag: d79eae1b-610b-42d3-ac2b-f43312181930
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

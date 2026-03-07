@@ -1,0 +1,99 @@
+table Geography
+	lineageTag: 9bb7fb9d-3643-448c-8fe9-acbebcca792c
+
+	column GeographyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cfe52316-beb3-47ad-a8bc-fef138bf5a39
+		summarizeBy: none
+		sourceColumn: GeographyKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Geography Type'
+		dataType: string
+		lineageTag: 0b9d5f88-bbf9-4f1c-9605-5c989ae05603
+		summarizeBy: none
+		sourceColumn: Geography Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataType: string
+		lineageTag: 55d105ec-4166-4a34-ad1d-e0fbf282cdb0
+		summarizeBy: none
+		sourceColumn: Continent
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 8c9c3157-b5e4-4c97-bfaa-c8dc00fd33d8
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State Province'
+		dataType: string
+		lineageTag: ec61b901-bec0-4edd-aaa7-374f90250a01
+		summarizeBy: none
+		sourceColumn: State Province
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Region Country'
+		dataType: string
+		lineageTag: e4d3ca8a-9b17-4870-b7aa-8cb2b2d5d70c
+		summarizeBy: none
+		sourceColumn: Region Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rank
+		dataType: int64
+		formatString: 0
+		lineageTag: a5137c9c-55c4-4fa4-817c-4392cb97b9d3
+		summarizeBy: min
+		sourceColumn: Rank
+
+		annotation SummarizationSetBy = User
+
+	hierarchy Geography
+		lineageTag: bfe23654-1356-480b-9f26-f7bd8d041555
+
+		level Continent
+			lineageTag: 8e5c0549-72bc-4a9b-a033-b00818056f33
+			column: Continent
+
+		level 'Region Country'
+			lineageTag: 5e051586-210d-4b53-815b-3b8ceaa5f9d4
+			column: 'Region Country'
+
+		level 'State Province'
+			lineageTag: e9a4a662-b2a7-41fe-ad41-62063357dbaa
+			column: 'State Province'
+
+		level City
+			lineageTag: 8ce5b5f2-c056-404c-b7db-7cf0218b7993
+			column: City
+
+	partition Geography-1fc53f52-b920-4513-a322-773479e7bdce = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SourceServer, ContosoRetailDW_DB),
+				    dbo_DimGeography = Source{[Schema="dbo",Item="v_DimGeography"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_DimGeography,{{"GeographyType", "Geography Type"}, {"ContinentName", "Continent"}, {"CityName", "City"}, {"StateProvinceName", "State Province"}, {"RegionCountryName", "Region Country"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = Geography
+
+	annotation PBI_NavigationStepName = Navigation
+

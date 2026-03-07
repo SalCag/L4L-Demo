@@ -38,13 +38,13 @@ AS
             WHEN 225
                 THEN 4  --  Refresh
             ELSE 1      --  Comparable
-         END                AS  [L4L_Status_Src]
+         END                AS  [L4LKey]
     FROM [Source]
     UNION ALL
     SELECT [StoreKey]
             ,CONVERT(date, '20231013')  AS  [OpenDate]
             ,CONVERT(date, '20230814')  AS  [CloseDate]
-            ,4                          AS  [L4L_Status_Src]
+            ,4                          AS  [L4LKey]
         FROM [Source]
             WHERE [StoreKey] = 222
     )
@@ -54,8 +54,8 @@ SELECT [StoreKey]
         ,[CloseDate]
         --,EOMONTH([OpenDate])    AS  [OpenDate_EOM]
         --,EOMONTH([CloseDate])   AS  [CloseDate_EOM]
-        ,[L4L_Status_Src]
-        ,1
+        ,[L4LKey]
+        --,1
     FROM [Result]
     WHERE [StoreKey] != 223
 ORDER BY [StoreKey]

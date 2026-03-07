@@ -40,6 +40,13 @@ AS
             ELSE 1      --  Comparable
          END                AS  [L4L_Status_Src]
     FROM [Source]
+    UNION ALL
+    SELECT [StoreKey]
+            ,CONVERT(date, '20231013')  AS  [OpenDate]
+            ,CONVERT(date, '20230814')  AS  [CloseDate]
+            ,4                          AS  [L4L_Status_Src]
+        FROM [Source]
+            WHERE [StoreKey] = 222
     )
 SELECT [StoreKey]
         --,[GeographyKey]

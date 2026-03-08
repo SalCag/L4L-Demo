@@ -55,7 +55,7 @@ SELECT [StoreKey]
         --,EOMONTH([OpenDate])    AS  [OpenDate_EOM]
         --,EOMONTH([CloseDate])   AS  [CloseDate_EOM]
         ,[L4LKey]
-        --,1
+        ,1
     FROM [Result]
     WHERE [StoreKey] != 223
 ORDER BY [StoreKey]

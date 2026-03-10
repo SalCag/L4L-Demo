@@ -148,6 +148,17 @@ table 'All Measures'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	measure 'Retail Sales (PY)' =
+			
+			CALCULATE([Retail Sales]
+			            ,'Time Intelligence'[Time Measures] = "PY"
+			            ,USERELATIONSHIP('Bridge_L4L'[L4LKey_PY], 'DIM_L4L'[L4LKey])
+			            )
+		displayFolder: Sales
+		lineageTag: 4fbe677c-3f58-4d5a-a00b-469ff9a024dd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	partition 'All Measures-73e585cd-90fc-476f-af6f-051eddf38311' = m
 		mode: import
 		source =

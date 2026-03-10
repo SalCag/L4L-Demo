@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
   "name": "6e1fb046b3cec0c965e1",
   "position": {
-    "x": 10.107681263460156,
-    "y": 210.42354630294327,
+    "x": 9.8507462686567155,
+    "y": 232.83582089552237,
     "z": 1,
-    "height": 460.35893754486716,
-    "width": 1269.8923187365397,
+    "height": 487.16417910447763,
+    "width": 1269.8507462686566,
     "tabOrder": 1
   },
   "visual": {
@@ -106,6 +106,20 @@
               },
               "queryRef": "All Measures.Retail Sales",
               "nativeQueryRef": "Retail Sales"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "All Measures"
+                    }
+                  },
+                  "Property": "Retail Sales (PY)"
+                }
+              },
+              "queryRef": "All Measures.Retail Sales (PY)",
+              "nativeQueryRef": "Retail Sales (PY)"
             }
           ]
         }

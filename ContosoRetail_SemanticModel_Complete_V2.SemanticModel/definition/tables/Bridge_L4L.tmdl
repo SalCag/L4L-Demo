@@ -27,6 +27,16 @@ table Bridge_L4L
 
 		annotation SummarizationSetBy = Automatic
 
+	column L4LKey_PY
+		dataType: double
+		lineageTag: 88d064e9-a351-4306-ad4c-6fc175477438
+		summarizeBy: sum
+		sourceColumn: L4LKey_PY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	partition Bridge_L4L = m
 		mode: import
 		source =
@@ -38,9 +48,11 @@ table Bridge_L4L
 				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded L4L_Months",{{"MonthKey", Int64.Type}, {"MonthKeyPY", Int64.Type}, {"FirstDayOfMonthPY", type date}, {"LastDayOfMonthPY", type date}, {"FirstDayOfMonth", type date}, {"LastDayOfMonth", type date}}),
 				    #"Added StoreMonthKey" = Table.AddColumn(#"Changed Type", "StoreMonthKey", each Text.From([StoreKey]) & "_" & Text.From([MonthKey]), type text),
 				    #"Merged L4L_Dates" = Table.NestedJoin(#"Added StoreMonthKey", {"StoreMonthKey"}, L4L_Dates, {"StoreMonthKey"}, "L4L_Dates", JoinKind.LeftOuter),
-				    #"Expanded  L4L_Dates" = Table.ExpandTableColumn(#"Merged L4L_Dates", "L4L_Dates", {"L4LKey"}, {"L4LKey"}),
+				    #"Expanded  L4L_Dates" = Table.ExpandTableColumn(#"Merged L4L_Dates", "L4L_Dates", {"CloseDate", "L4LKey", "L4LKey_PY", "OpenDate"}, {"CloseDate", "L4LKey", "L4LKey_PY", "OpenDate"}),
 				    #"Replaced empty L4LKey with 1" = Table.ReplaceValue(#"Expanded  L4L_Dates",null,1,Replacer.ReplaceValue,{"L4LKey"}),
-				    #"Removed Other Columns1" = Table.SelectColumns(#"Replaced empty L4LKey with 1",{"StoreKey", "StoreMonthKey", "L4LKey"})
+				    #"Replaced empty L4LKey_PY with 1" = Table.ReplaceValue(#"Replaced empty L4LKey with 1",null,1,Replacer.ReplaceValue,{"L4LKey_PY"}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Replaced empty L4LKey_PY with 1",{"StoreKey", "MonthKey", "MonthKeyPY", "FirstDayOfMonth", "LastDayOfMonth", "FirstDayOfMonthPY", "LastDayOfMonthPY", "StoreMonthKey", "L4LKey", "L4LKey_PY", "OpenDate", "CloseDate"}),
+				    #"Removed Other Columns1" = Table.SelectColumns(#"Reordered Columns",{"StoreKey", "StoreMonthKey", "L4LKey", "L4LKey_PY"})
 				in
 				    #"Removed Other Columns1"
 

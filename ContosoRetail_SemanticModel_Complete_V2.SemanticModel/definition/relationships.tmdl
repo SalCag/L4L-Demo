@@ -67,3 +67,8 @@ relationship AutoDetected_30f4f34e-d5ce-426f-8a44-c03b7405d059
 	fromColumn: Bridge_L4L.StoreKey
 	toColumn: Store.StoreKey
 
+relationship c7139abc-43d7-c448-3912-c48ceb892738
+	isActive: false
+	fromColumn: Bridge_L4L.L4LKey_PY
+	toColumn: DIM_L4L.L4LKey
+

@@ -495,13 +495,13 @@
       "ordinal": 4,
       "scrollPosition": {
         "x": 0,
-        "y": 73
+        "y": 0
       },
       "nodes": [
         {
           "location": {
-            "x": 826,
-            "y": 494.5
+            "x": 842,
+            "y": 375.5
           },
           "nodeIndex": "Retail Sales",
           "nodeLineageTag": "5697e32a-350d-4b7e-8ab4-003b6997857d",
@@ -509,7 +509,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
@@ -522,7 +522,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 3
         },
         {
           "location": {
@@ -535,7 +535,7 @@
             "height": 176,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 2
         },
         {
           "location": {
@@ -548,7 +548,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 4
         }
       ],
       "name": "Layout 2",

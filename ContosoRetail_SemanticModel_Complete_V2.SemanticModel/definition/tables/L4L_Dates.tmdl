@@ -1,0 +1,166 @@
+table L4L_Dates
+	lineageTag: b97605b7-dc2e-470e-bb0c-07b0afeb6ef7
+
+	column StoreKey
+		dataType: int64
+		formatString: 0
+		lineageTag: e3441bd9-75c6-47cf-aa7b-cb2accc86157
+		summarizeBy: none
+		sourceColumn: StoreKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column OpenDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: b6cab32a-b816-44ba-89ce-81812dcd0742
+		summarizeBy: none
+		sourceColumn: OpenDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CloseDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 6cb9d79b-e871-496c-87e5-c77e2a1b72f6
+		summarizeBy: none
+		sourceColumn: CloseDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column L4LKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 02f27b6b-2570-4e58-810b-f685cfd5129a
+		summarizeBy: none
+		sourceColumn: L4LKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 115cc880-fcc3-409f-84e7-abdc63f56210
+		summarizeBy: count
+		sourceColumn: MonthKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthKeyPY
+		dataType: int64
+		formatString: 0
+		lineageTag: ff16de00-023c-482c-9b0a-e8887f040a10
+		summarizeBy: sum
+		sourceColumn: MonthKeyPY
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDayOfMonth
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: f917d3af-b8c5-4145-bbc3-0614f89eb805
+		summarizeBy: none
+		sourceColumn: FirstDayOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LastDayOfMonth
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: b965ff6e-cb30-47e5-9af5-e2d3257d6870
+		summarizeBy: none
+		sourceColumn: LastDayOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FirstDayOfMonthPY
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 7b35e6c3-0f9e-4497-b3b1-b783adcc01b2
+		summarizeBy: none
+		sourceColumn: FirstDayOfMonthPY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LastDayOfMonthPY
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 6372ceea-7c60-4455-98a8-fdf18ee8b87a
+		summarizeBy: none
+		sourceColumn: LastDayOfMonthPY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column StoreMonthKey
+		dataType: string
+		lineageTag: 401b6f6e-433a-4e8a-a933-9930343ead87
+		summarizeBy: none
+		sourceColumn: StoreMonthKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column L4LKey_PY
+		dataType: int64
+		formatString: 0
+		lineageTag: 6d46ddcd-8770-469e-9fde-42ff55082c4c
+		summarizeBy: sum
+		sourceColumn: L4LKey_PY
+
+		annotation SummarizationSetBy = Automatic
+
+	column Valid
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3b969d77-59a0-4696-99e3-5a534e7724a7
+		summarizeBy: none
+		sourceColumn: Valid
+
+		annotation SummarizationSetBy = Automatic
+
+	partition L4L_Dates = m
+		mode: import
+		source =
+				let
+				    Source = L4L_Stores,
+				    #"Added Custom" = Table.AddColumn(Source, "Months", each L4L_Months),
+				    #"Expanded Months" = Table.ExpandTableColumn(#"Added Custom", "Months", {"MonthKey", "MonthKeyPY", "FirstDayOfMonth", "LastDayOfMonth", "FirstDayOfMonthPY", "LastDayOfMonthPY"}, {"MonthKey", "MonthKeyPY", "FirstDayOfMonth", "LastDayOfMonth", "FirstDayOfMonthPY", "LastDayOfMonthPY"}),
+				    #"Changed Datatype" = Table.TransformColumnTypes(#"Expanded Months",{{"MonthKey", Int64.Type}, {"MonthKeyPY", Int64.Type}, {"FirstDayOfMonth", type date}, {"LastDayOfMonth", type date}, {"FirstDayOfMonthPY", type date}, {"LastDayOfMonthPY", type date}}),
+				    #"Added StoreMonthKey" = Table.AddColumn(#"Changed Datatype", "StoreMonthKey", each Text.From([StoreKey]) & "_" & Text.From([MonthKey]), type text),
+				    #"Added L4LKey_PY" = Table.AddColumn(#"Added StoreMonthKey", "L4LKey_PY", each if [L4LKey] = 2 and
+				       [OpenDate] >= [FirstDayOfMonth]
+				   then 2
+				      else if [L4LKey] = 3 and
+				          [CloseDate] <= [LastDayOfMonth]
+				          then 3
+				              else if [L4LKey] = 4 and ([OpenDate] >= [FirstDayOfMonth] and [CloseDate] <= [LastDayOfMonth])
+				              then 4
+				          else 1, Int64.Type),
+				    #"Added Valid" = Table.AddColumn(#"Added L4LKey_PY", "Valid", each if [L4LKey_PY] <> 1 or [L4LKey] = 2 and
+				       [OpenDate] >= [FirstDayOfMonthPY]
+				   then true
+				      else if [L4LKey] = 3 and
+				          [CloseDate] <= [LastDayOfMonthPY]
+				          then true
+				              else if [L4LKey] = 4 and ([OpenDate] >= [FirstDayOfMonthPY] and [CloseDate] <= [LastDayOfMonthPY])
+				              then true
+				          else false, type logical),
+				    #"Filtered Rows" = Table.SelectRows(#"Added Valid", each ([Valid] = true))
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

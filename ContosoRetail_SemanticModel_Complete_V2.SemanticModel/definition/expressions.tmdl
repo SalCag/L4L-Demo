@@ -30,41 +30,6 @@ expression Test_Demo_DB = "Test_Demo" meta [IsParameterQuery=true, Type="Text", 
 
 	annotation PBI_ResultType = Text
 
-expression L4L_Dates =
-		let
-		    Source = Sql.Database(SourceServer, ContosoRetailDW_DB, [Query="WITH [Source]#(lf)AS#(lf)(SELECT [St].[StoreKey]#(lf)        --,[St].[GeographyKey]#(lf)        ,[St].[Status]#(lf)        ,DATEADD(yyyy, 13, CONVERT(date, [St].[OpenDate])) AS  [OpenDate]#(lf)    FROM [dbo].[DimStore]   AS  [St]#(lf)        INNER JOIN [dbo].[DimGeography]     AS  [G]#(lf)            ON [G].[GeographyKey] = [St].[GeographyKey]#(lf)        WHERE [G].[RegionCountryName] = 'Italy')#(lf), [Result]#(lf)AS#(lf)(SELECT [StoreKey]#(lf)        --,[GeographyKey]#(lf)        ,CASE [StoreKey]#(lf)            WHEN 225#(lf)                THEN CONVERT(date, '20240713')#(lf)            WHEN 224#(lf)                THEN CONVERT(date, '20240524')#(lf)            WHEN 226#(lf)                THEN CONVERT(date, '20241018')#(lf)            ELSE [OpenDate]#(lf)         END                AS  [OpenDate]#(lf)        ,CASE [StoreKey]#(lf)            WHEN 222#(lf)                THEN CONVERT(date, '20240818')#(lf)            WHEN 225#(lf)                THEN CONVERT(date, '20240303')#(lf)            ELSE CONVERT(date, '20301231')#(lf)         END                AS  [CloseDate]#(lf)        ,CASE [StoreKey]#(lf)            WHEN 224#(lf)                THEN 2  --  Opening#(lf)            WHEN 226#(lf)                THEN 2  --  Opening#(lf)            WHEN 222#(lf)                THEN 3  --  Closing#(lf)            WHEN 225#(lf)                THEN 4  --  Refresh#(lf)            ELSE 1      --  Comparable#(lf)         END                AS  [L4LKey]#(lf)    FROM [Source]#(lf)    UNION ALL#(lf)    SELECT [StoreKey]#(lf)            ,CONVERT(date, '20231013')  AS  [OpenDate]#(lf)            ,CONVERT(date, '20230814')  AS  [CloseDate]#(lf)            ,4                          AS  [L4LKey]#(lf)        FROM [Source]#(lf)            WHERE [StoreKey] = 222#(lf)    )#(lf)SELECT [StoreKey]#(lf)        --,[GeographyKey]#(lf)        ,[OpenDate]#(lf)        ,[CloseDate]#(lf)        --,EOMONTH([OpenDate])    AS  [OpenDate_EOM]#(lf)        --,EOMONTH([CloseDate])   AS  [CloseDate_EOM]#(lf)        ,[L4LKey]#(lf)        --,1#(lf)    FROM [Result]#(lf)    WHERE [StoreKey] != 223#(lf)ORDER BY [StoreKey]#(lf)            ,[OpenDate];#(lf)#(lf)"]),
-		    #"Changed Type" = Table.TransformColumnTypes(Source,{{"OpenDate", type date}, {"CloseDate", type date}}),
-		    #"Added Custom" = Table.AddColumn(#"Changed Type", "Months", each L4L_Months),
-		    #"Expanded Months" = Table.ExpandTableColumn(#"Added Custom", "Months", {"MonthKey", "MonthKeyPY", "FirstDayOfMonth", "LastDayOfMonth", "FirstDayOfMonthPY", "LastDayOfMonthPY"}, {"MonthKey", "MonthKeyPY", "FirstDayOfMonth", "LastDayOfMonth", "FirstDayOfMonthPY", "LastDayOfMonthPY"}),
-		    #"Changed Datatype" = Table.TransformColumnTypes(#"Expanded Months",{{"MonthKey", Int64.Type}, {"MonthKeyPY", Int64.Type}, {"FirstDayOfMonth", type date}, {"LastDayOfMonth", type date}, {"FirstDayOfMonthPY", type date}, {"LastDayOfMonthPY", type date}}),
-		    #"Added StoreMonthKey" = Table.AddColumn(#"Changed Datatype", "StoreMonthKey", each Text.From([StoreKey]) & "_" & Text.From([MonthKey]), type text),
-		    #"Added L4LKey_PY" = Table.AddColumn(#"Added StoreMonthKey", "L4LKey_PY", each if [L4LKey] = 2 and
-		       [OpenDate] >= [FirstDayOfMonth]
-		   then 2
-		      else if [L4LKey] = 3 and
-		          [CloseDate] <= [LastDayOfMonth]
-		          then 3
-		              else if [L4LKey] = 4 and ([OpenDate] >= [FirstDayOfMonth] and [CloseDate] <= [LastDayOfMonth])
-		              then 4
-		          else 1, Int64.Type),
-		    #"Added Valid" = Table.AddColumn(#"Added L4LKey_PY", "Valid", each if [L4LKey] = 2 and
-		       [OpenDate] >= [FirstDayOfMonthPY]
-		   then true
-		      else if [L4LKey] = 3 and
-		          [CloseDate] <= [LastDayOfMonthPY]
-		          then true
-		              else if [L4LKey] = 4 and ([OpenDate] >= [FirstDayOfMonthPY] and [CloseDate] <= [LastDayOfMonthPY])
-		              then true
-		          else false, type logical),
-		    #"Filtered Rows" = Table.SelectRows(#"Added Valid", each ([Valid] = true))
-		in
-		    #"Filtered Rows"
-	lineageTag: 5beb3a52-1463-49ef-91b9-9bf4bb31b08e
-
-	annotation PBI_NavigationStepName = Navigation
-
-	annotation PBI_ResultType = Table
-
 expression L4L_Months =
 		let
 		    Source = Date,

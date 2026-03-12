@@ -37,6 +37,90 @@ table Bridge_L4L
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	column MonthKey
+		dataType: int64
+		formatString: 0
+		lineageTag: b8a14198-3086-4a3a-8c1b-2fa020f2d979
+		summarizeBy: count
+		sourceColumn: MonthKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthKeyPY
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e714611-229f-4168-9830-91598bac432c
+		summarizeBy: sum
+		sourceColumn: MonthKeyPY
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDayOfMonth
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 6c78de6b-f535-4ec8-9ffb-c37e2cabd320
+		summarizeBy: none
+		sourceColumn: FirstDayOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LastDayOfMonth
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 59fc3ec4-5f23-413f-bb15-3f7e7358f1de
+		summarizeBy: none
+		sourceColumn: LastDayOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FirstDayOfMonthPY
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: e0b0e7f7-d058-49b8-9c48-8731c4fa5fcb
+		summarizeBy: none
+		sourceColumn: FirstDayOfMonthPY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LastDayOfMonthPY
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 59a39af5-a60d-431b-84f4-2a93cef82c3d
+		summarizeBy: none
+		sourceColumn: LastDayOfMonthPY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column OpenDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 81050b61-244a-4f56-96f2-ea9ea56fbd9a
+		summarizeBy: none
+		sourceColumn: OpenDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CloseDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 62a97c27-2d0b-4e8c-b2d9-45a233db1f9b
+		summarizeBy: none
+		sourceColumn: CloseDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
 	partition Bridge_L4L = m
 		mode: import
 		source =
@@ -51,10 +135,9 @@ table Bridge_L4L
 				    #"Expanded  L4L_Dates" = Table.ExpandTableColumn(#"Merged L4L_Dates", "L4L_Dates", {"CloseDate", "L4LKey", "L4LKey_PY", "OpenDate"}, {"CloseDate", "L4LKey", "L4LKey_PY", "OpenDate"}),
 				    #"Replaced empty L4LKey with 1" = Table.ReplaceValue(#"Expanded  L4L_Dates",null,1,Replacer.ReplaceValue,{"L4LKey"}),
 				    #"Replaced empty L4LKey_PY with 1" = Table.ReplaceValue(#"Replaced empty L4LKey with 1",null,1,Replacer.ReplaceValue,{"L4LKey_PY"}),
-				    #"Reordered Columns" = Table.ReorderColumns(#"Replaced empty L4LKey_PY with 1",{"StoreKey", "MonthKey", "MonthKeyPY", "FirstDayOfMonth", "LastDayOfMonth", "FirstDayOfMonthPY", "LastDayOfMonthPY", "StoreMonthKey", "L4LKey", "L4LKey_PY", "OpenDate", "CloseDate"}),
-				    #"Removed Other Columns1" = Table.SelectColumns(#"Reordered Columns",{"StoreKey", "StoreMonthKey", "L4LKey", "L4LKey_PY"})
+				    #"Reordered Columns" = Table.ReorderColumns(#"Replaced empty L4LKey_PY with 1",{"StoreKey", "MonthKey", "MonthKeyPY", "FirstDayOfMonth", "LastDayOfMonth", "FirstDayOfMonthPY", "LastDayOfMonthPY", "StoreMonthKey", "L4LKey", "L4LKey_PY", "OpenDate", "CloseDate"})
 				in
-				    #"Removed Other Columns1"
+				    #"Reordered Columns"
 
 	annotation PBI_NavigationStepName = Navigation
 

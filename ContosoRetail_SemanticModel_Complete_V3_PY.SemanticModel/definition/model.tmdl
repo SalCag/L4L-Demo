@@ -1,0 +1,48 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: de-CH
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["Date","Channel","Currency","Promotion","Product","Geography","Store","Retail Sales","Exchange Rate","Inventory","All Measures","Alternative Categories","Brand Colors","Scaling","Retail Measures","Last Update","SourceServer","ContosoRetailDW_DB","Test_Demo_DB","L4L_Dates","L4L_Months","Bridge_L4L","DIM_L4L","L4L_Stores"]
+
+annotation __TEdtr = 1
+
+annotation BestPracticeAnalyzer_IgnoreRules = {"RuleIDs":[]}
+
+annotation BestPracticeAnalyzer_ExternalRuleFiles = ["https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json"]
+
+annotation __BNorm = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Date
+ref table Channel
+ref table Currency
+ref table Promotion
+ref table Product
+ref table Geography
+ref table Store
+ref table 'Retail Sales'
+ref table 'Exchange Rate'
+ref table Inventory
+ref table 'Time Intelligence'
+ref table 'All Measures'
+ref table 'Alternative Categories'
+ref table 'Brand Colors'
+ref table Scaling
+ref table 'Last Update'
+ref table Bridge_L4L
+ref table DIM_L4L
+ref table L4L_Stores
+ref table L4L_Dates
+
+ref role CustomerOLS
+
+ref cultureInfo en-US
+

@@ -561,22 +561,6 @@ table Date
 
 		annotation SummarizationSetBy = Automatic
 
-	column QuarterName2
-		dataType: string
-		lineageTag: b1dd1cf4-a9c6-4e15-a93f-f295e78a28de
-		summarizeBy: none
-		sourceColumn: QuarterName2
-
-		annotation SummarizationSetBy = Automatic
-
-	column YearQuarterName2
-		dataType: string
-		lineageTag: 10607c36-4f98-4d84-8482-6fd939a3192a
-		summarizeBy: none
-		sourceColumn: YearQuarterName2
-
-		annotation SummarizationSetBy = Automatic
-
 	column MonthName
 		dataType: string
 		lineageTag: 04bf79cd-50e7-4907-a729-0a2499aee441
@@ -644,6 +628,22 @@ table Date
 
 		annotation SummarizationSetBy = Automatic
 
+	column QuarterNameShort
+		dataType: string
+		lineageTag: 0e9b0e3f-6b65-43da-a2b4-d794d5d8b48c
+		summarizeBy: none
+		sourceColumn: QuarterNameShort
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearQuarterNameShort
+		dataType: string
+		lineageTag: 634864a6-dc81-4e3e-ae5c-4c28eb3b8ff1
+		summarizeBy: none
+		sourceColumn: YearQuarterNameShort
+
+		annotation SummarizationSetBy = Automatic
+
 	hierarchy Calendar
 		lineageTag: 9acccda6-aecc-4c82-981d-3921190d26e5
 
@@ -659,9 +659,45 @@ table Date
 		mode: import
 		source =
 				let
-				    Source = Sql.Database(SourceServer, Test_Demo_DB, [Query="SELECT [DateKey]#(lf)        ,[Date]#(lf)        ,[Year]#(lf)        ,[Semester]#(lf)        ,[EnglishSemesterName]          AS  [SemesterName]#(lf)        ,[EnglishYearSemesterName]      AS  [YearSemesterName]#(lf)        ,[SemesterKey]#(lf)        ,[Quarter]#(lf)        ,[EnglishQuarterName]           AS  [QuarterName]#(lf)        ,[EnglishYearQuarterName]       AS  [YearQuarterName]#(lf)        ,[QuarterKey]#(lf)        ,[QuarterName]#(lf)        ,[YearQuarterName]#(lf)        ,[Month]#(lf)        ,[MonthKey]#(lf)        ,[MonthKeyPY]#(lf)        ,[YearMonth]#(lf)        ,[FirstDayOfMonth]#(lf)        ,[FirstDayOfMonthKey]#(lf)        ,[LastDayOfMonth]#(lf)        ,[LastDayOfMonthKey]#(lf)        ,[FirstDayOfMonthPY]#(lf)        ,[FirstDayOfMonthPYKey]#(lf)        ,[LastDayOfMonthPY]#(lf)        ,[LastDayOfMonthPYKey]#(lf)        ,[EnglishMonthName]             AS  [MonthName]#(lf)        ,[EnglishMonthShortName]        AS  [MonthShortName]#(lf)        ,[EnglishYearMonthShortName]    AS  [YearMonthShortName]#(lf)        ,[Week]#(lf)        ,[WeekKey]#(lf)        ,[WeekKeyPY]#(lf)        ,[YearOfWeek]#(lf)        ,[YearWeek]#(lf)        ,[DayOfYear]#(lf)        ,[DayOfYearKey]#(lf)        ,[DayOfMonth]#(lf)        ,[DayOfWeek]#(lf)        ,[DayOfWeekKey]#(lf)        ,[FirstDayOfWeekDate]#(lf)        ,[FirstDayOfWeekDateKey]#(lf)        ,[LastDayOfWeekDate]#(lf)        ,[LastDayOfWeekDateKey]#(lf)        ,[FirstDayOfWeekDatePY]#(lf)        ,[FirstDayOfWeekDatePYKey]#(lf)        ,[LastDayOfWeekDatePY]#(lf)        ,[LastDayOfWeekDatePYKey]#(lf)        ,[EnglishDayOfWeekName]         AS  [DayOfWeekName]#(lf)        ,[EnglishDayOfWeekNameShort]    AS  [DayOfWeekNameShort]#(lf)        ,[WeekWeekday]#(lf)        ,[YearWeekWeekday]#(lf)        ,[IsWorkingday]#(lf)        ,[WorkingdayNumber]#(lf)        ,[IsToday]#(lf)        ,[IsCurrentWeek]#(lf)        ,[IsCurrentMonth]#(lf)        ,[IsCurrentQuarter]#(lf)        ,[IsCurrentSemester]#(lf)        ,[IsCurrentYear]#(lf)        ,[IsLeapYear]#(lf)        ,[IsInCurrentWindow]#(lf)        ,[YearIndex]#(lf)        ,[YearIndex_Name]#(lf)        ,[QuarterIndex]#(lf)        ,[SemesterIndex]#(lf)        ,[MonthIndex]#(lf)        ,[WeekIndex]#(lf)        ,[DayIndex]#(lf)    FROM [dbo].[Date]#(lf)        WHERE [Year] BETWEEN 2022 AND 2026;#(lf)"])
+				    Source = Sql.Database(SourceServer, Test_Demo_DB, [Query="SELECT [DateKey]#(lf)        ,[Date]#(lf)        ,[Year]#(lf)        ,[Semester]#(lf)        ,[EnglishSemesterName]          AS  [SemesterName]#(lf)        ,[EnglishYearSemesterName]      AS  [YearSemesterName]#(lf)        ,[SemesterKey]#(lf)        ,[Quarter]#(lf)        ,[EnglishQuarterName]           AS  [QuarterName]#(lf)        ,[EnglishYearQuarterName]       AS  [YearQuarterName]#(lf)        ,[QuarterKey]#(lf)        ,[QuarterName]                  AS  [QuarterNameShort]#(lf)        ,[YearQuarterName]              AS  [YearQuarterNameShort]#(lf)        ,[Month]#(lf)        ,[MonthKey]#(lf)        ,[MonthKeyPY]#(lf)        ,[YearMonth]#(lf)        ,[FirstDayOfMonth]#(lf)        ,[FirstDayOfMonthKey]#(lf)        ,[LastDayOfMonth]#(lf)        ,[LastDayOfMonthKey]#(lf)        ,[FirstDayOfMonthPY]#(lf)        ,[FirstDayOfMonthPYKey]#(lf)        ,[LastDayOfMonthPY]#(lf)        ,[LastDayOfMonthPYKey]#(lf)        ,[EnglishMonthName]             AS  [MonthName]#(lf)        ,[EnglishMonthShortName]        AS  [MonthShortName]#(lf)        ,[EnglishYearMonthShortName]    AS  [YearMonthShortName]#(lf)        ,[Week]#(lf)        ,[WeekKey]#(lf)        ,[WeekKeyPY]#(lf)        ,[YearOfWeek]#(lf)        ,[YearWeek]#(lf)        ,[DayOfYear]#(lf)        ,[DayOfYearKey]#(lf)        ,[DayOfMonth]#(lf)        ,[DayOfWeek]#(lf)        ,[DayOfWeekKey]#(lf)        ,[FirstDayOfWeekDate]#(lf)        ,[FirstDayOfWeekDateKey]#(lf)        ,[LastDayOfWeekDate]#(lf)        ,[LastDayOfWeekDateKey]#(lf)        ,[FirstDayOfWeekDatePY]#(lf)        ,[FirstDayOfWeekDatePYKey]#(lf)        ,[LastDayOfWeekDatePY]#(lf)        ,[LastDayOfWeekDatePYKey]#(lf)        ,[EnglishDayOfWeekName]         AS  [DayOfWeekName]#(lf)        ,[EnglishDayOfWeekNameShort]    AS  [DayOfWeekNameShort]#(lf)        ,[WeekWeekday]#(lf)        ,[YearWeekWeekday]#(lf)        ,[IsWorkingday]#(lf)        ,[WorkingdayNumber]#(lf)        ,[IsToday]#(lf)        ,[IsCurrentWeek]#(lf)        ,[IsCurrentMonth]#(lf)        ,[IsCurrentQuarter]#(lf)        ,[IsCurrentSemester]#(lf)        ,[IsCurrentYear]#(lf)        ,[IsLeapYear]#(lf)        ,[IsInCurrentWindow]#(lf)        ,[YearIndex]#(lf)        ,[YearIndex_Name]#(lf)        ,[QuarterIndex]#(lf)        ,[SemesterIndex]#(lf)        ,[MonthIndex]#(lf)        ,[WeekIndex]#(lf)        ,[DayIndex]#(lf)    FROM [dbo].[Date]#(lf)        WHERE [Year] BETWEEN 2022 AND 2026;#(lf)"])
 				in
 				    Source
+
+	calendar 'Gregorian Calendar'
+		lineageTag: 26a6149c-5c3d-4a16-9dd1-62afb451ba75
+
+		calendarColumnGroup = year
+			primaryColumn: Year
+
+		calendarColumnGroup = quarter
+			primaryColumn: QuarterKey
+			associatedColumn: YearQuarterNameShort
+			associatedColumn: YearQuarterName
+
+		calendarColumnGroup = quarterOfYear
+			primaryColumn: Quarter
+			associatedColumn: QuarterName
+			associatedColumn: QuarterNameShort
+
+		calendarColumnGroup = month
+			primaryColumn: MonthKey
+			associatedColumn: YearMonthShortName
+
+		calendarColumnGroup = monthOfYear
+			primaryColumn: Month
+			associatedColumn: MonthName
+			associatedColumn: MonthShortName
+
+		calendarColumnGroup = date
+			primaryColumn: DateKey
+			associatedColumn: Date
+			associatedColumn: DayIndex
+
+		calendarColumnGroup = dayOfYear
+			primaryColumn: DayOfYear
+
+		calendarColumnGroup = dayOfMonth
+			primaryColumn: DayOfMonth
 
 	annotation PBI_ResultType = Table
 

@@ -5,7 +5,7 @@ table L4L_Stores
 		dataType: int64
 		formatString: 0
 		lineageTag: 713379be-097c-44a6-8028-f1dfc3f594e5
-		summarizeBy: none
+		summarizeBy: count
 		sourceColumn: StoreKey
 
 		annotation SummarizationSetBy = Automatic
@@ -36,7 +36,7 @@ table L4L_Stores
 		dataType: int64
 		formatString: 0
 		lineageTag: f6a6b091-37bd-4772-8d57-dd892575aa22
-		summarizeBy: none
+		summarizeBy: count
 		sourceColumn: L4LKey
 
 		annotation SummarizationSetBy = Automatic

@@ -1,0 +1,55 @@
+table Currency
+	lineageTag: 0338a9ea-3473-45d5-97be-672a36e33d6f
+
+	column CurrencyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1602734f-5ee8-4bd9-96cf-594d9e2785e2
+		summarizeBy: none
+		sourceColumn: CurrencyKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrencyLabel
+		dataType: string
+		lineageTag: 210d6f71-75a3-4802-a6ce-160ec309cb09
+		summarizeBy: none
+		sourceColumn: CurrencyLabel
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrencyName
+		dataType: string
+		lineageTag: c357b05c-b6a8-4f9c-a187-2d850dbf8440
+		summarizeBy: none
+		sourceColumn: CurrencyName
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrencyDescription
+		dataType: string
+		lineageTag: 73edc33e-2ebe-492b-88a4-29cc36c024f3
+		summarizeBy: none
+		sourceColumn: CurrencyDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Currency-cfbd83c2-8fe9-45c2-9d90-4a1d44fafef2 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SourceServer, ContosoRetailDW_DB),
+				    dbo_DimCurrency = Source{[Schema="dbo",Item="DimCurrency"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(dbo_DimCurrency,{"ETLLoadID", "LoadDate", "UpdateDate"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = Currency
+
+	annotation PBI_NavigationStepName = Navigation
+

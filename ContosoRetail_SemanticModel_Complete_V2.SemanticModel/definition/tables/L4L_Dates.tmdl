@@ -36,7 +36,7 @@ table L4L_Dates
 		dataType: int64
 		formatString: 0
 		lineageTag: 02f27b6b-2570-4e58-810b-f685cfd5129a
-		summarizeBy: none
+		summarizeBy: count
 		sourceColumn: L4LKey
 
 		annotation SummarizationSetBy = Automatic
@@ -111,18 +111,8 @@ table L4L_Dates
 
 		annotation SummarizationSetBy = Automatic
 
-	column L4LKey_PY
-		dataType: int64
-		formatString: 0
-		lineageTag: 6d46ddcd-8770-469e-9fde-42ff55082c4c
-		summarizeBy: sum
-		sourceColumn: L4LKey_PY
-
-		annotation SummarizationSetBy = Automatic
-
 	column Valid
-		dataType: boolean
-		formatString: """TRUE"";""TRUE"";""FALSE"""
+		dataType: string
 		lineageTag: 3b969d77-59a0-4696-99e3-5a534e7724a7
 		summarizeBy: none
 		sourceColumn: Valid
@@ -138,16 +128,7 @@ table L4L_Dates
 				    #"Expanded Months" = Table.ExpandTableColumn(#"Added Custom", "Months", {"MonthKey", "MonthKeyPY", "FirstDayOfMonth", "LastDayOfMonth", "FirstDayOfMonthPY", "LastDayOfMonthPY"}, {"MonthKey", "MonthKeyPY", "FirstDayOfMonth", "LastDayOfMonth", "FirstDayOfMonthPY", "LastDayOfMonthPY"}),
 				    #"Changed Datatype" = Table.TransformColumnTypes(#"Expanded Months",{{"MonthKey", Int64.Type}, {"MonthKeyPY", Int64.Type}, {"FirstDayOfMonth", type date}, {"LastDayOfMonth", type date}, {"FirstDayOfMonthPY", type date}, {"LastDayOfMonthPY", type date}}),
 				    #"Added StoreMonthKey" = Table.AddColumn(#"Changed Datatype", "StoreMonthKey", each Text.From([StoreKey]) & "_" & Text.From([MonthKey]), type text),
-				    #"Added L4LKey_PY" = Table.AddColumn(#"Added StoreMonthKey", "L4LKey_PY", each if [L4LKey] = 2 and
-				       [OpenDate] >= [FirstDayOfMonth]
-				   then 2
-				      else if [L4LKey] = 3 and
-				          [CloseDate] <= [LastDayOfMonth]
-				          then 3
-				              else if [L4LKey] = 4 and ([OpenDate] >= [FirstDayOfMonth] and [CloseDate] <= [LastDayOfMonth])
-				              then 4
-				          else 1, Int64.Type),
-				    #"Added Valid" = Table.AddColumn(#"Added L4LKey_PY", "Valid", each if [L4LKey_PY] <> 1 or [L4LKey] = 2 and
+				    #"Added Valid" = Table.AddColumn(#"Added StoreMonthKey", "Valid", each if [L4LKey] = 2 and
 				       [OpenDate] >= [FirstDayOfMonthPY]
 				   then true
 				      else if [L4LKey] = 3 and
@@ -155,7 +136,7 @@ table L4L_Dates
 				          then true
 				              else if [L4LKey] = 4 and ([OpenDate] >= [FirstDayOfMonthPY] and [CloseDate] <= [LastDayOfMonthPY])
 				              then true
-				          else false, type logical),
+				          else false),
 				    #"Filtered Rows" = Table.SelectRows(#"Added Valid", each ([Valid] = true))
 				in
 				    #"Filtered Rows"

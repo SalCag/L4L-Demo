@@ -1,0 +1,56 @@
+table L4L_Stores
+	lineageTag: b9d394d0-40e5-4a7c-a341-e107954d5e66
+
+	column StoreKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 713379be-097c-44a6-8028-f1dfc3f594e5
+		summarizeBy: none
+		sourceColumn: StoreKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column OpenDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 74fcb62c-cfdd-4b96-93ff-9118ff418141
+		summarizeBy: none
+		sourceColumn: OpenDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CloseDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 4cc1c025-49ab-4f9a-bb5b-abf160e3376c
+		summarizeBy: none
+		sourceColumn: CloseDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column L4LKey
+		dataType: int64
+		formatString: 0
+		lineageTag: f6a6b091-37bd-4772-8d57-dd892575aa22
+		summarizeBy: count
+		sourceColumn: L4LKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition L4L_Stores = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SourceServer, ContosoRetailDW_DB, [Query="WITH [Source]#(lf)AS#(lf)(SELECT [St].[StoreKey]#(lf)        --,[St].[GeographyKey]#(lf)        ,[St].[Status]#(lf)        ,DATEADD(yyyy, 13, CONVERT(date, [St].[OpenDate])) AS  [OpenDate]#(lf)    FROM [dbo].[DimStore]   AS  [St]#(lf)        INNER JOIN [dbo].[DimGeography]     AS  [G]#(lf)            ON [G].[GeographyKey] = [St].[GeographyKey]#(lf)        WHERE [G].[RegionCountryName] = 'Italy')#(lf), [Result]#(lf)AS#(lf)(SELECT [StoreKey]#(lf)        --,[GeographyKey]#(lf)        ,CASE [StoreKey]#(lf)            WHEN 225#(lf)                THEN CONVERT(date, '20240713')#(lf)            WHEN 224#(lf)                THEN CONVERT(date, '20240524')#(lf)            WHEN 226#(lf)                THEN CONVERT(date, '20241018')#(lf)            ELSE [OpenDate]#(lf)         END                AS  [OpenDate]#(lf)        ,CASE [StoreKey]#(lf)            WHEN 222#(lf)                THEN CONVERT(date, '20240818')#(lf)            WHEN 225#(lf)                THEN CONVERT(date, '20240303')#(lf)            ELSE CONVERT(date, '20301231')#(lf)         END                AS  [CloseDate]#(lf)        ,CASE [StoreKey]#(lf)            WHEN 224#(lf)                THEN 2  --  Opening#(lf)            WHEN 226#(lf)                THEN 2  --  Opening#(lf)            WHEN 222#(lf)                THEN 3  --  Closing#(lf)            WHEN 225#(lf)                THEN 4  --  Refresh#(lf)            ELSE 1      --  Comparable#(lf)         END                AS  [L4LKey]#(lf)    FROM [Source]#(lf)    UNION ALL#(lf)    SELECT [StoreKey]#(lf)            ,CONVERT(date, '20231013')  AS  [OpenDate]#(lf)            ,CONVERT(date, '20230814')  AS  [CloseDate]#(lf)            ,4                          AS  [L4LKey]#(lf)        FROM [Source]#(lf)            WHERE [StoreKey] = 222#(lf)    )#(lf)SELECT [StoreKey]#(lf)        --,[GeographyKey]#(lf)        ,[OpenDate]#(lf)        ,[CloseDate]#(lf)        --,EOMONTH([OpenDate])    AS  [OpenDate_EOM]#(lf)        --,EOMONTH([CloseDate])   AS  [CloseDate_EOM]#(lf)        ,[L4LKey]#(lf)        --,1#(lf)    FROM [Result]#(lf)    WHERE [StoreKey] != 223#(lf)ORDER BY [StoreKey]#(lf)            ,[OpenDate];#(lf)#(lf)"]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"OpenDate", type date}, {"CloseDate", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,51 @@
+table Bridge_L4L
+	lineageTag: 1d509d5b-3359-432c-b055-d56b1a6c99d6
+
+	column StoreKey
+		dataType: int64
+		formatString: 0
+		lineageTag: bdbeeb8f-cfe4-41d8-89b3-d1665f19585c
+		summarizeBy: none
+		sourceColumn: StoreKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreMonthKey
+		dataType: string
+		lineageTag: b8209002-022f-4568-8671-e62aa212774e
+		summarizeBy: none
+		sourceColumn: StoreMonthKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column L4LKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 88de615f-4cdd-4deb-b204-2c6760d47653
+		summarizeBy: none
+		sourceColumn: L4LKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column L4LKey_PY
+		dataType: int64
+		lineageTag: 88d064e9-a351-4306-ad4c-6fc175477438
+		summarizeBy: sum
+		sourceColumn: L4LKey_PY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Bridge_L4L = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(SourceServer, ContosoRetailDW_DB, [Query="SET NOCOUNT ON;#(lf)#(lf)-- CLeanup before run#(lf)IF OBJECT_ID('tempdb..#tmp_Store_Dates') IS NOT NULL#(lf)BEGIN#(lf)    PRINT 'DROP TABLE [#tmp_Store_Dates];';#(lf)    DROP TABLE [#tmp_Store_Dates];#(lf)END#(lf)#(lf)-- Crate table to hold the Stores with their Opening and CLosing Dates together with the L4LKey to assign#(lf)CREATE TABLE [#tmp_Store_Dates]#(lf)(#(lf)#(tab)[StoreKey] [int] NOT NULL,#(lf)#(tab)[OpenDate] [date] NULL,#(lf)#(tab)[CloseDate] [date] NULL,#(lf)#(tab)[L4LKey] [int] NOT NULL#(lf));#(lf)#(lf)-- Insert the Stores with their Opening and CLosing Dates together with the L4LKey to assign#(lf)WITH [Source]#(lf)AS#(lf)(SELECT [St].[StoreKey]#(lf)        --,[St].[GeographyKey]#(lf)        ,[St].[Status]#(lf)        ,DATEADD(yyyy, 13, CONVERT(date, [St].[OpenDate])) AS  [OpenDate]#(lf)    FROM [dbo].[DimStore]   AS  [St]#(lf)        INNER JOIN [dbo].[DimGeography]     AS  [G]#(lf)            ON [G].[GeographyKey] = [St].[GeographyKey]#(lf)        WHERE [G].[RegionCountryName] = 'Italy')#(lf), [Store_Dates]#(lf)AS#(lf)(SELECT [StoreKey]#(lf)        --,[GeographyKey]#(lf)        ,CASE [StoreKey]#(lf)            WHEN 225#(lf)                THEN CONVERT(date, '20240713')#(lf)            WHEN 224#(lf)                THEN CONVERT(date, '20240524')#(lf)            WHEN 226#(lf)                THEN CONVERT(date, '20241018')#(lf)            ELSE [OpenDate]#(lf)         END                AS  [OpenDate]#(lf)        ,CASE [StoreKey]#(lf)            WHEN 222#(lf)                THEN CONVERT(date, '20240818')#(lf)            WHEN 225#(lf)                THEN CONVERT(date, '20240303')#(lf)            ELSE CONVERT(date, '20301231')#(lf)         END                AS  [CloseDate]#(lf)        ,CASE [StoreKey]#(lf)            WHEN 224#(lf)                THEN 2  --  Opening#(lf)            WHEN 226#(lf)                THEN 2  --  Opening#(lf)            WHEN 222#(lf)                THEN 3  --  Closing#(lf)            WHEN 225#(lf)                THEN 4  --  Refresh#(lf)            ELSE 1      --  Comparable#(lf)         END                AS  [L4LKey]#(lf)    FROM [Source]#(lf)    UNION ALL#(lf)    SELECT [StoreKey]#(lf)            ,CONVERT(date, '20231013')  AS  [OpenDate]#(lf)            ,CONVERT(date, '20230814')  AS  [CloseDate]#(lf)            ,4                          AS  [L4LKey]#(lf)        FROM [Source]#(lf)            WHERE [StoreKey] = 222#(lf)    )#(lf)INSERT INTO [#tmp_Store_Dates]#(lf)           ([StoreKey]#(lf)           ,[OpenDate]#(lf)           ,[CloseDate]#(lf)           ,[L4LKey])#(lf)SELECT [StoreKey]#(lf)        ,[OpenDate]#(lf)        ,[CloseDate]#(lf)        ,[L4LKey]#(lf)    FROM [Store_Dates];#(lf)#(lf)#(lf)#(lf)-- Start Update procedure#(lf)#(lf)#(lf)-- Cle3anup temporary table for all the Stores with all Months#(lf)IF OBJECT_ID('tempdb..#tmp_Stores_Months') IS NOT NULL#(lf)BEGIN#(lf)    PRINT 'DROP TABLE [#tmp_Stores_Months];';#(lf)    DROP TABLE [#tmp_Stores_Months];#(lf)END#(lf)#(lf)CREATE TABLE [#tmp_Stores_Months]#(lf)(#(lf)#(tab)[StoreKey]          int NOT NULL,#(lf)#(tab)[OpenDate]          date NULL,#(lf)#(tab)[CloseDate]         date NULL,#(lf)#(tab)[L4LKey]            int NULL,#(lf)#(tab)[L4LKey_PY]         int NULL,#(lf)#(tab)[MonthKey]          int NULL,#(lf)#(tab)[MonthKeyPY]        int NULL,#(lf)#(tab)[FirstDayOfMonth]   date NULL,#(lf)#(tab)[LastDayOfMonth]    date NULL,#(lf)#(tab)[FirstDayOfMonthPY] date NULL,#(lf)#(tab)[LastDayOfMonthPY]  date NULL#(lf));#(lf)#(lf)#(lf)-- Insert all Stores with CROSS APPLY all Months#(lf)WITH [Stores]#(lf)AS#(lf)-- Get all Stores#(lf)(SELECT [St].[StoreKey]#(lf)        ,NULL               AS  [OpenDate]#(lf)        ,NULL               AS  [CloseDate]#(lf)        ,NULL               AS  [L4LKey]#(lf)        ,NULL               AS  [L4LKey_PY]#(lf)    FROM [dbo].[DimStore]   AS  [St])#(lf), [Months]#(lf)AS#(lf)(#(lf)-- Get all Months#(lf)SELECT DISTINCT #(lf)      [MonthKey] + 1600                         AS  [MonthKey]#(lf)      ,[MonthKeyPY] + 1600                      AS  [MonthKeyPY]#(lf)      ,DATEADD(yyyy, 16, [FirstDayOfMonth]  )   AS  [FirstDayOfMonth]#(lf)      ,DATEADD(yyyy, 16, [LastDayOfMonth]   )   AS  [LastDayOfMonth]#(lf)      ,DATEADD(yyyy, 16, [FirstDayOfMonthPY])   AS  [FirstDayOfMonthPY]#(lf)      ,DATEADD(yyyy, 16, [LastDayOfMonthPY] )   AS  [LastDayOfMonthPY]#(lf)  FROM [dbo].[Date])#(lf)INSERT INTO [#tmp_Stores_Months]#(lf)           ([StoreKey]#(lf)           ,[OpenDate]#(lf)           ,[CloseDate]#(lf)           ,[L4LKey]#(lf)           ,[L4LKey_PY]#(lf)           ,[MonthKey]#(lf)           ,[MonthKeyPY]#(lf)           ,[FirstDayOfMonth]#(lf)           ,[LastDayOfMonth]#(lf)           ,[FirstDayOfMonthPY]#(lf)           ,[LastDayOfMonthPY])#(lf)-- CROSS APPLY all Stores with all Months to get the complete list of rows#(lf)SELECT [S].[StoreKey]#(lf)        ,[S].[OpenDate]#(lf)        ,[S].[CloseDate]#(lf)        ,[S].[L4LKey]#(lf)        ,[S].[L4LKey_PY]#(lf)        ,[M].[MonthKey]#(lf)        ,[M].[MonthKeyPY]#(lf)        ,[M].[FirstDayOfMonth]#(lf)        ,[M].[LastDayOfMonth]#(lf)        ,[M].[FirstDayOfMonthPY]#(lf)        ,[M].[LastDayOfMonthPY]#(lf)    FROM [Stores]           AS  [S]#(lf)        CROSS JOIN [Months] AS  [M];#(lf)#(lf)-- Declare all needed variables#(lf)DECLARE @StoreKey       int;#(lf)DECLARE @OpenDate       date;#(lf)DECLARE @CloseDate      date;#(lf)DECLARE @L4LKey         int;#(lf)#(lf)-- Create the Cursor to loop through the Stores with each opening. closing and refresh dates#(lf)DECLARE sd CURSOR FOR#(lf)    SELECT [StoreKey]#(lf)            ,[OpenDate]#(lf)            ,[CloseDate]#(lf)            ,[L4LKey]#(lf)        FROM #tmp_Store_Dates#(lf)            -- Order the the CLosing date, as the procedure must run from the first (oldest) to the last (newest) row#(lf)            ORDER BY [CloseDate];#(lf)#(lf)OPEN sd;#(lf)#(lf)-- Get the first row#(lf)FETCH NEXT FROM sd INTO @StoreKey, @OpenDate, @CloseDate, @L4LKey;#(lf)#(lf)-- Start the loop#(lf)WHILE @@FETCH_STATUS = 0#(lf)BEGIN#(lf)    -- Update all rows according to each store based on the L4L status and the respective dates fbased on the previous years dates#(lf)    UPDATE [#tmp_Stores_Months]#(lf)        SET [OpenDate] = @OpenDate#(lf)            ,[CloseDate] = @CloseDate#(lf)            ,[L4LKey] = CASE @L4LKey#(lf)                            WHEN 2#(lf)                                THEN IIF(@OpenDate >= [FirstDayOfMonthPY], @L4LKey, NULL)#(lf)                            WHEN 3#(lf)                                THEN IIF(@CloseDate <= [LastDayOfMonthPY], @L4LKey, NULL)#(lf)                            WHEN 4#(lf)                                THEN IIF(@OpenDate >= [FirstDayOfMonthPY] AND @CloseDate <= [LastDayOfMonthPY], @L4LKey, NULL)#(lf)                                ELSE 1#(lf)                            END#(lf)            WHERE [L4LKey] IS NULL#(lf)                AND [StoreKey] = @StoreKey;#(lf)#(lf)-- Update based on the current month for the PY calculation#(lf)UPDATE [#tmp_Stores_Months]#(lf)        SET [OpenDate] = @OpenDate#(lf)            ,[CloseDate] = @CloseDate#(lf)            ,[L4LKey_PY] = CASE @L4LKey#(lf)                            WHEN 2#(lf)                                THEN IIF(@OpenDate >= [FirstDayOfMonth], @L4LKey, NULL)#(lf)                            WHEN 3#(lf)                                THEN IIF(@CloseDate <= [LastDayOfMonth], @L4LKey, NULL)#(lf)                            WHEN 4#(lf)                                THEN IIF(@OpenDate >= [FirstDayOfMonth] AND @CloseDate <= [LastDayOfMonth], @L4LKey, NULL)#(lf)                                ELSE 1#(lf)                            END#(lf)            WHERE [L4LKey_PY] IS NULL#(lf)                AND [StoreKey] = @StoreKey;#(lf)    #(lf)    -- Get the next row until all rows are processed#(lf)    FETCH NEXT FROM sd INTO @StoreKey, @OpenDate, @CloseDate, @L4LKey;#(lf)#(lf)END#(lf)#(lf)-- Close the Cursor#(lf)CLOSE sd;#(lf)DEALLOCATE sd;#(lf)#(lf)-- Update the L4LKey and L4LKey_PY in all empty rows#(lf)UPDATE #tmp_Stores_Months#(lf)    SET [L4LKey] = 1#(lf)        WHERE [L4LKey] IS NULL;#(lf)#(lf)UPDATE #tmp_Stores_Months#(lf)    SET [L4LKey_PY] = 1#(lf)        WHERE [L4LKey_PY] IS NULL;#(lf)#(lf)#(lf)-- Select the table for the Bridge_L4L table#(lf)SELECT [StoreKey]#(lf)        ,CONVERT(varchar(12), [StoreKey]) + '_' + CONVERT(varchar(12), [MonthKey])  AS  [StoreMonthKey]#(lf)        ,[L4LKey]#(lf)        ,[L4LKey_PY]#(lf)    FROM #tmp_Stores_Months#(lf)        ORDER BY [StoreKey], [MonthKey];#(lf)#(lf)#(lf)-- Cleanup all#(lf)IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('tempdb..#tmp_Stores_Months'))#(lf)BEGIN#(lf)    PRINT 'DROP TABLE [#tmp_Stores_Months];';#(lf)    DROP TABLE [#tmp_Stores_Months];#(lf)END#(lf)#(lf)IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('tempdb..#tmp_Store_Dates'))#(lf)BEGIN#(lf)    PRINT 'DROP TABLE [#tmp_Stores_Dates];';#(lf)    DROP TABLE [#tmp_Store_Dates];#(lf)END#(lf)#(lf)"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

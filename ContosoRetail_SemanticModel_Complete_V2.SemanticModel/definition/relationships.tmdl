@@ -56,7 +56,6 @@ relationship 348859ff-4aae-4dc7-abd9-f71a8c6e25e3
 	toColumn: 'Brand Colors'.BrandColor
 
 relationship d396d982-1ea8-61ca-74d3-161ba0b389f5
-	toCardinality: many
 	fromColumn: 'Retail Sales'.StoreMonthKey
 	toColumn: Bridge_L4L.StoreMonthKey
 
@@ -68,16 +67,13 @@ relationship AutoDetected_30f4f34e-d5ce-426f-8a44-c03b7405d059
 	fromColumn: Bridge_L4L.StoreKey
 	toColumn: Store.StoreKey
 
-relationship c7139abc-43d7-c448-3912-c48ceb892738
-	isActive: false
-	fromColumn: Bridge_L4L.L4LKey_PY
-	toColumn: DIM_L4L.L4LKey
-
 relationship AutoDetected_a68c17c1-7dd6-45af-89a0-ccd453efff53
+	isActive: false
 	fromColumn: L4L_Stores.StoreKey
 	toColumn: Store.StoreKey
 
 relationship AutoDetected_05b7184f-72d7-4b5f-82c1-6e91b570c28a
+	isActive: false
 	fromColumn: L4L_Stores.L4LKey
 	toColumn: DIM_L4L.L4LKey
 
@@ -86,6 +82,7 @@ relationship AutoDetected_6321e8bc-ceb4-479d-8a3f-ed140fc83b4d
 	toColumn: Store.StoreKey
 
 relationship AutoDetected_4fc79fb0-d9c0-4108-a02f-ac638b75ad45
+	isActive: false
 	fromColumn: L4L_Dates.L4LKey
 	toColumn: DIM_L4L.L4LKey
 

@@ -1,0 +1,42 @@
+table 'Brand Colors'
+	lineageTag: 687bfb27-69d1-43d2-9562-e7156e36c947
+
+	column Brand
+		dataType: string
+		lineageTag: 53520d31-641c-4152-bf65-9ea460819e8b
+		summarizeBy: none
+		sourceColumn: Brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column Color
+		dataType: string
+		lineageTag: 53b4de2d-361e-4eb8-911a-fc53386991f3
+		summarizeBy: none
+		sourceColumn: Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column BrandColor
+		dataType: string
+		lineageTag: b6bedd65-861d-4758-9318-d1c98b88f3eb
+		summarizeBy: none
+		sourceColumn: BrandColor
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Brand Colors-33689f27-580e-44c1-bd51-092aab9b5a0f' = m
+		mode: import
+		source =
+				let
+				    Source = Product,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Brand", "Color"}),
+				    #"Added Custom" = Table.AddColumn(#"Removed Other Columns", "BrandColor", each [Brand] & "_" & [Color]),
+				    #"Removed Duplicates" = Table.Distinct(#"Added Custom")
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

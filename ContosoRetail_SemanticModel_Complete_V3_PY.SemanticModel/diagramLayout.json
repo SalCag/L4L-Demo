@@ -1,0 +1,610 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 681.15531335149876
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 13.323423423423037,
+            "y": 636.10180180180191
+          },
+          "nodeIndex": "All Measures",
+          "size": {
+            "height": 194,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 411.02665122615809,
+            "y": 172.91735040871936
+          },
+          "nodeIndex": "Channel",
+          "nodeLineageTag": "7319516e-2a2f-4501-8557-8fd12a0a4057",
+          "size": {
+            "height": 236,
+            "width": 238
+          },
+          "zIndex": 15
+        },
+        {
+          "location": {
+            "x": 1484.9805000000001,
+            "y": 71.172699999999992
+          },
+          "nodeIndex": "Currency",
+          "size": {
+            "height": 240,
+            "width": 242
+          },
+          "zIndex": 16
+        },
+        {
+          "location": {
+            "x": 676.617,
+            "y": 580.339
+          },
+          "nodeIndex": "Date",
+          "size": {
+            "height": 341,
+            "width": 238
+          },
+          "zIndex": 18
+        },
+        {
+          "location": {
+            "x": 614.67710899182566,
+            "y": 1079.2529972752045
+          },
+          "nodeIndex": "Geography",
+          "nodeLineageTag": "9bb7fb9d-3643-448c-8fe9-acbebcca792c",
+          "size": {
+            "height": 293,
+            "width": 238
+          },
+          "zIndex": 19
+        },
+        {
+          "location": {
+            "x": 23.162891008174363,
+            "y": 183.33510626703
+          },
+          "nodeIndex": "Product",
+          "nodeLineageTag": "6684c99b-7b3d-4719-b8f2-d0a775d3bfc1",
+          "size": {
+            "height": 341,
+            "width": 238
+          },
+          "zIndex": 23
+        },
+        {
+          "location": {
+            "x": 695.92889918256139,
+            "y": 20.11251389645777
+          },
+          "nodeIndex": "Promotion",
+          "nodeLineageTag": "5c3a9a4d-45c2-4fc4-8f4d-21dbbba87b12",
+          "size": {
+            "height": 341,
+            "width": 238
+          },
+          "zIndex": 22
+        },
+        {
+          "location": {
+            "x": 333.921,
+            "y": 583.231
+          },
+          "nodeIndex": "Retail Sales",
+          "size": {
+            "height": 345,
+            "width": 242
+          },
+          "zIndex": 24
+        },
+        {
+          "location": {
+            "x": 176.44840453345262,
+            "y": 1081.7734689161091
+          },
+          "nodeIndex": "Store",
+          "size": {
+            "height": 345,
+            "width": 242
+          },
+          "zIndex": 21
+        },
+        {
+          "location": {
+            "x": 1697.7875,
+            "y": 414.6875
+          },
+          "nodeIndex": "Exchange Rate",
+          "size": {
+            "height": 280,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 1001.6666626930237,
+            "y": 34.375
+          },
+          "nodeIndex": "Inventory",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 1855.5634676893824,
+            "y": 14.2294615732593
+          },
+          "nodeIndex": "Time Intelligence",
+          "size": {
+            "height": 136,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "Alternative Categories",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 336.30682263283359,
+            "y": 0
+          },
+          "nodeIndex": "Brand Colors",
+          "nodeLineageTag": "687bfb27-69d1-43d2-9562-e7156e36c947",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 2798.4,
+            "y": 637.38673445805455
+          },
+          "nodeIndex": "Scaling",
+          "nodeLineageTag": "f5e85f21-bd3b-40ca-a6de-cbab10587ede",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 3082.4,
+            "y": 661.38673445805455
+          },
+          "nodeIndex": "Last Update",
+          "nodeLineageTag": "1b330bd1-58b6-421b-9252-92d629cd019b",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 3366.4,
+            "y": 563.38673445805455
+          },
+          "nodeIndex": "Bridge_L4L",
+          "nodeLineageTag": "1d509d5b-3359-432c-b055-d56b1a6c99d6",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3650.4,
+            "y": 625.38673445805455
+          },
+          "nodeIndex": "DIM_L4L",
+          "nodeLineageTag": "0a96c99c-2768-48c1-914f-f99e42e3282b",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {},
+          "nodeIndex": "L4L_Dates",
+          "nodeLineageTag": "b97605b7-dc2e-470e-bb0c-07b0afeb6ef7",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {},
+          "nodeIndex": "L4L_Stores",
+          "nodeLineageTag": "b9d394d0-40e5-4a7c-a341-e107954d5e66",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 95.572916666666657,
+      "pinKeyFieldsToTop": true,
+      "showExtraHeaderInfo": true,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 329,
+            "y": 4
+          },
+          "nodeIndex": "Date",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 760.6301369863013,
+            "y": 658.568493150685
+          },
+          "nodeIndex": "Retail Sales",
+          "nodeLineageTag": "5697e32a-350d-4b7e-8ab4-003b6997857d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 31.506849315068493,
+            "y": 321.541095890411
+          },
+          "nodeIndex": "Store",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 940,
+            "y": 10.5
+          },
+          "nodeIndex": "Product",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 621,
+            "y": 14
+          },
+          "nodeIndex": "Promotion",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 958,
+            "y": 454.5
+          },
+          "nodeIndex": "Channel",
+          "size": {
+            "height": 184,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 666.61643835616439
+          },
+          "nodeIndex": "Currency",
+          "size": {
+            "height": 184,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 290.39726027397262,
+            "y": 739.70547945205476
+          },
+          "nodeIndex": "Exchange Rate",
+          "size": {
+            "height": 280,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 8.2191780821917888,
+            "y": 0
+          },
+          "nodeIndex": "Geography",
+          "size": {
+            "height": 232,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Sales by Store",
+      "zoomValue": 73,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": true,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 2,
+      "scrollPosition": {
+        "x": 0,
+        "y": 22.666666030883789
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 546.1,
+            "y": 491.1
+          },
+          "nodeIndex": "Inventory",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 913.96665649414058,
+            "y": 10.633312988281205
+          },
+          "nodeIndex": "Currency",
+          "size": {
+            "height": 184,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 318.29999999999995
+          },
+          "nodeIndex": "Store",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 550.1,
+            "y": 1
+          },
+          "nodeIndex": "Product",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 252,
+            "y": 0
+          },
+          "nodeIndex": "Date",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 982,
+            "y": 344.16666603088379
+          },
+          "nodeIndex": "Exchange Rate",
+          "size": {
+            "height": 280,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "Geography",
+          "size": {
+            "height": 232,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Inventory",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": true,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 3,
+      "scrollPosition": {
+        "x": 0,
+        "y": 3
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 906,
+            "y": 435.5
+          },
+          "nodeIndex": "Date",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Customer Per Year",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": true,
+      "showExtraHeaderInfo": true,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 4,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 636,
+            "y": 421.5
+          },
+          "nodeIndex": "Retail Sales",
+          "nodeLineageTag": "5697e32a-350d-4b7e-8ab4-003b6997857d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 26.5
+          },
+          "nodeIndex": "Store",
+          "nodeLineageTag": "1be75310-bd39-4514-9fa2-96d946389429",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 378,
+            "y": 17
+          },
+          "nodeIndex": "DIM_L4L",
+          "nodeLineageTag": "0a96c99c-2768-48c1-914f-f99e42e3282b",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 292,
+            "y": 385.5
+          },
+          "nodeIndex": "Bridge_L4L",
+          "nodeLineageTag": "1d509d5b-3359-432c-b055-d56b1a6c99d6",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 963,
+            "y": 0
+          },
+          "nodeIndex": "L4L_Dates",
+          "nodeLineageTag": "b97605b7-dc2e-470e-bb0c-07b0afeb6ef7",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 969,
+            "y": 397.5
+          },
+          "nodeIndex": "L4L_Stores",
+          "nodeLineageTag": "b9d394d0-40e5-4a7c-a341-e107954d5e66",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Layout 2",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": true,
+      "showExtraHeaderInfo": true,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Layout 2",
+  "defaultDiagram": "All tables"
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "09850fa5605a3c0789ba",
+  "position": {
+    "x": 749.85826771653547,
+    "y": 0,
+    "z": 4,
+    "height": 210.64566929133858,
+    "width": 530.14173228346453,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Store"
+                    }
+                  },
+                  "Property": "Store"
+                }
+              },
+              "queryRef": "Store.Store",
+              "nativeQueryRef": "Store"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "L4L_Stores"
+                    }
+                  },
+                  "Property": "StoreKey"
+                }
+              },
+              "queryRef": "L4L_Stores.StoreKey",
+              "nativeQueryRef": "StoreKey"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "L4L_Stores"
+                    }
+                  },
+                  "Property": "L4LKey"
+                }
+              },
+              "queryRef": "L4L_Stores.L4LKey",
+              "nativeQueryRef": "L4LKey"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "L4L_Stores"
+                    }
+                  },
+                  "Property": "OpenDate"
+                }
+              },
+              "queryRef": "L4L_Stores.OpenDate",
+              "nativeQueryRef": "OpenDate"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "L4L_Stores"
+                    }
+                  },
+                  "Property": "CloseDate"
+                }
+              },
+              "queryRef": "L4L_Stores.CloseDate",
+              "nativeQueryRef": "CloseDate"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

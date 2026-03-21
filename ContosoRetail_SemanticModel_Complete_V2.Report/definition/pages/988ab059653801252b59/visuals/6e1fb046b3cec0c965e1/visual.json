@@ -47,11 +47,11 @@
                       "Hierarchy": "L4L Hierarchy"
                     }
                   },
-                  "Level": "L4L"
+                  "Level": "L4L Main"
                 }
               },
-              "queryRef": "DIM_L4L.L4L Hierarchy.L4L_LongText",
-              "nativeQueryRef": "L4L Hierarchy L4L_LongText",
+              "queryRef": "DIM_L4L.L4L Hierarchy.L4L Main",
+              "nativeQueryRef": "L4L Hierarchy L4L Main",
               "active": true
             },
             {
@@ -70,8 +70,8 @@
                   "Level": "L4L Detail"
                 }
               },
-              "queryRef": "DIM_L4L.L4L Hierarchy.L4L Detail",
-              "nativeQueryRef": "L4L Hierarchy L4L Detail",
+              "queryRef": "DIM_L4L.L4L Hierarchy.L4L_LongText",
+              "nativeQueryRef": "L4L Hierarchy L4L_LongText",
               "active": true
             },
             {
@@ -163,6 +163,24 @@
         "levels": [
           {
             "queryRefs": [
+              "DIM_L4L.L4L Hierarchy.L4L Main"
+            ],
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_L4L"
+                    }
+                  },
+                  "Property": "L4L_Text"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
               "DIM_L4L.L4L Hierarchy.L4L_LongText"
             ],
             "identityKeys": [
@@ -176,12 +194,6 @@
                   "Property": "L4L_LongText"
                 }
               }
-            ],
-            "isPinned": true
-          },
-          {
-            "queryRefs": [
-              "DIM_L4L.L4L Hierarchy.L4L Detail"
             ],
             "isPinned": true
           },

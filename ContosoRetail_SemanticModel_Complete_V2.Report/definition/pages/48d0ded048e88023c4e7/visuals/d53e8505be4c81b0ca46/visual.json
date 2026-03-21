@@ -34,13 +34,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "L4L_Dates"
+                      "Entity": "L4L_Stores"
                     }
                   },
                   "Property": "StoreKey"
                 }
               },
-              "queryRef": "L4L_Dates.StoreKey",
+              "queryRef": "L4L_Stores.StoreKey",
               "nativeQueryRef": "StoreKey"
             },
             {
@@ -48,27 +48,27 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "L4L_Dates"
+                      "Entity": "L4L_Stores"
                     }
                   },
                   "Property": "L4LKey"
                 }
               },
-              "queryRef": "L4L_Dates.L4LKey",
-              "nativeQueryRef": "L4LKey"
+              "queryRef": "L4L_Stores.L4LKey",
+              "nativeQueryRef": "L4LKey1"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "L4L_Dates"
+                      "Entity": "L4L_Stores"
                     }
                   },
                   "Property": "OpenDate"
                 }
               },
-              "queryRef": "L4L_Dates.OpenDate",
+              "queryRef": "L4L_Stores.OpenDate",
               "nativeQueryRef": "OpenDate"
             },
             {
@@ -76,13 +76,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "L4L_Dates"
+                      "Entity": "L4L_Stores"
                     }
                   },
                   "Property": "CloseDate"
                 }
               },
-              "queryRef": "L4L_Dates.CloseDate",
+              "queryRef": "L4L_Stores.CloseDate",
               "nativeQueryRef": "CloseDate"
             }
           ]

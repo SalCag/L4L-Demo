@@ -5,14 +5,14 @@ table L4L_Stores
 		dataType: int64
 		formatString: 0
 		lineageTag: 713379be-097c-44a6-8028-f1dfc3f594e5
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: StoreKey
 
 		annotation SummarizationSetBy = Automatic
 
 	column OpenDate
 		dataType: dateTime
-		formatString: Long Date
+		formatString: Short Date
 		lineageTag: 74fcb62c-cfdd-4b96-93ff-9118ff418141
 		summarizeBy: none
 		sourceColumn: OpenDate
@@ -23,7 +23,7 @@ table L4L_Stores
 
 	column CloseDate
 		dataType: dateTime
-		formatString: Long Date
+		formatString: Short Date
 		lineageTag: 4cc1c025-49ab-4f9a-bb5b-abf160e3376c
 		summarizeBy: none
 		sourceColumn: CloseDate

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.0.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.1.0/schema.json",
   "themeCollection": {
     "baseTheme": {
       "name": "CY19SU12",
@@ -39,11 +39,6 @@
       }
     ]
   },
-  "publicCustomVisuals": [
-    "waterfall6C9ED82ABD1F44C4A0D590CE01EB5EE7",
-    "zebraBiCards2C860CFAA9944091B75F0DBD117F20FA",
-    "ZebraBITablesBAE31B370F254F808553548EFB35BFA5"
-  ],
   "resourcePackages": [
     {
       "name": "SharedResources",

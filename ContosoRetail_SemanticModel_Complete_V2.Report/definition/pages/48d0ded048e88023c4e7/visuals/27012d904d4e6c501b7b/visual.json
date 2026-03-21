@@ -28,7 +28,27 @@
                       "Hierarchy": "L4L Hierarchy"
                     }
                   },
-                  "Level": "L4L"
+                  "Level": "L4L Main"
+                }
+              },
+              "queryRef": "DIM_L4L.L4L Hierarchy.L4L Main",
+              "nativeQueryRef": "L4L Hierarchy L4L Main",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DIM_L4L"
+                        }
+                      },
+                      "Hierarchy": "L4L Hierarchy"
+                    }
+                  },
+                  "Level": "L4L Detail"
                 }
               },
               "queryRef": "DIM_L4L.L4L Hierarchy.L4L",

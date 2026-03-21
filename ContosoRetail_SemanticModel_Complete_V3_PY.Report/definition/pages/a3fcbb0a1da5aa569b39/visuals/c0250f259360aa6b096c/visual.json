@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "c0250f259360aa6b096c",
+  "position": {
+    "x": 9.7276757441418624,
+    "y": 0,
+    "z": 0,
+    "height": 165.37048765041163,
+    "width": 280.48131728942366,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_L4L"
+                    }
+                  },
+                  "Property": "L4L_LongText"
+                }
+              },
+              "queryRef": "DIM_L4L.L4L_LongText",
+              "nativeQueryRef": "L4L_LongText",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_L4L"
+                    }
+                  },
+                  "Property": "L4L_Text"
+                }
+              },
+              "queryRef": "DIM_L4L.L4L_Text",
+              "nativeQueryRef": "L4L_Text",
+              "active": false
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Basic'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

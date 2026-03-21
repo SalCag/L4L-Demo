@@ -68,7 +68,6 @@ relationship AutoDetected_30f4f34e-d5ce-426f-8a44-c03b7405d059
 	toColumn: Store.StoreKey
 
 relationship AutoDetected_a68c17c1-7dd6-45af-89a0-ccd453efff53
-	isActive: false
 	fromColumn: L4L_Stores.StoreKey
 	toColumn: Store.StoreKey
 

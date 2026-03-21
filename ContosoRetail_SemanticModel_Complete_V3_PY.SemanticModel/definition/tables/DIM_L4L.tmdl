@@ -40,13 +40,13 @@ table DIM_L4L
 	hierarchy 'L4L Hierarchy'
 		lineageTag: 116ac076-7dc0-4e16-90a6-3db77566dfa9
 
-		level L4L
-			lineageTag: fcb86707-e647-4b86-a10c-5b81ebf866db
-			column: L4L_LongText
-
-		level 'L4L Detail'
+		level 'L4L Main'
 			lineageTag: 1bf88b73-dc1f-4d3f-a72f-2bb0140b5156
 			column: L4L_Text
+
+		level 'L4L Detail'
+			lineageTag: fcb86707-e647-4b86-a10c-5b81ebf866db
+			column: L4L_LongText
 
 	partition DIM_L4L = m
 		mode: import

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "a3fcbb0a1da5aa569b39",
+  "displayName": "L4L Demo PY",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F5F5F5'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "774af17b0840c0a80eae",
+      "target": "ad302e1bca6d9e7271ad",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4207948bda558e604e0e",
+      "target": "ad302e1bca6d9e7271ad",
+      "type": "NoFilter"
+    }
+  ]
+}
